@@ -7,6 +7,7 @@ namespace a9f\Fractor\Application;
 use a9f\Fractor\Application\Contract\FileProcessor;
 use a9f\Fractor\Application\Contract\FileWriter;
 use a9f\Fractor\Application\Contract\FractorRule;
+use a9f\Fractor\Application\ValueObject\AppliedRule;
 use a9f\Fractor\Application\ValueObject\File;
 use a9f\Fractor\Caching\Detector\ChangedFilesDetector;
 use a9f\Fractor\Configuration\ConfigurationRuleFilter;
@@ -71,7 +72,8 @@ final readonly class FractorRunner
 
         $totalChanged = 0;
         foreach ($filePaths as $filePath) {
-            $file = new File($filePath, FileSystem::read($filePath));
+            $rawContent = FileSystem::read($filePath);
+            $file = new File($filePath, $rawContent);
             $this->fileCollector->addFile($file);
 
             if ($shouldShowProgressBar) {
@@ -92,6 +94,13 @@ final readonly class FractorRunner
             }
 
             ++$totalChanged;
+
+            // flag code formatting whenever the file was re-formatted: no real rule ran
+            // (pure reformat) or the normalized baseline differs from the raw input
+            // (reindent alongside a rule)
+            if ($file->getAppliedRules() === [] || $file->getOriginalContent() !== $rawContent) {
+                $file->addAppliedRule(AppliedRule::codeFormat());
+            }
 
             $file->setFileDiff($this->fileDiffFactory->createFileDiff($configuration->shouldShowDiffs(), $file));
 
