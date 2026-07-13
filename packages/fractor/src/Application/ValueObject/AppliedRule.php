@@ -9,7 +9,12 @@ use a9f\Fractor\Application\Contract\FractorRule;
 final readonly class AppliedRule
 {
     /**
-     * @param class-string<FractorRule> $fractorClass
+     * Identifier for the virtual code-formatting rule, which has no backing class.
+     */
+    public const CODE_FORMAT_RULE = 'CodeFormatRule';
+
+    /**
+     * @param class-string<FractorRule>|self::CODE_FORMAT_RULE $fractorClass
      */
     private function __construct(
         private string $fractorClass,
@@ -29,11 +34,21 @@ final readonly class AppliedRule
         return new self($fractorRule);
     }
 
+    public static function codeFormat(): self
+    {
+        return new self(self::CODE_FORMAT_RULE);
+    }
+
     /**
-     * @return class-string<FractorRule>
+     * @return class-string<FractorRule>|self::CODE_FORMAT_RULE
      */
     public function getFractorClass(): string
     {
         return $this->fractorClass;
+    }
+
+    public function isCodeFormat(): bool
+    {
+        return $this->fractorClass === self::CODE_FORMAT_RULE;
     }
 }

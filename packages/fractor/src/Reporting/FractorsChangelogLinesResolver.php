@@ -24,7 +24,7 @@ final readonly class FractorsChangelogLinesResolver
 
         $fractorsChangelogsLines = [];
         foreach ($rectorsChangelogs as $fractorClass => $changelog) {
-            $fractorShortClass = (string) Strings::after($fractorClass, '\\', -1);
+            $fractorShortClass = Strings::after($fractorClass, '\\', -1) ?? $fractorClass;
             $fractorsChangelogsLines[] = $changelog === null ? $fractorShortClass : $fractorShortClass . ' (' . $changelog . ')';
         }
 

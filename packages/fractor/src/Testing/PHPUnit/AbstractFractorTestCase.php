@@ -91,7 +91,7 @@ abstract class AbstractFractorTestCase extends TestCase implements FractorTestIn
         return FixtureFileFinder::yieldDirectory($directory, $suffix);
     }
 
-    protected function doTestFile(string $fixtureFilePath): void
+    protected function doTestFile(string $fixtureFilePath): FractorTestResult
     {
         // prepare input file contents and expected file output contents
         $fixtureFileContents = FileSystem::read($fixtureFilePath);
@@ -117,7 +117,7 @@ abstract class AbstractFractorTestCase extends TestCase implements FractorTestIn
         // write temp file
         FileSystem::write($inputFilePath, $inputFileContents, null);
 
-        $this->doTestFileMatchesExpectedContent($inputFilePath, $expectedFileContents, $fixtureFilePath);
+        return $this->doTestFileMatchesExpectedContent($inputFilePath, $expectedFileContents, $fixtureFilePath);
     }
 
     /**
@@ -162,7 +162,7 @@ abstract class AbstractFractorTestCase extends TestCase implements FractorTestIn
         string $originalFilePath,
         string $expectedFileContents,
         string $fixtureFilePath
-    ): void {
+    ): FractorTestResult {
         // the file is now changed (if any rule matches)
         $fractorTestResult = $this->processFilePath($originalFilePath);
         $this->fractorTestResult = $fractorTestResult;
@@ -180,6 +180,8 @@ abstract class AbstractFractorTestCase extends TestCase implements FractorTestIn
         }
 
         self::assertSame(trim($expectedFileContents), trim($changedContents), $failureMessage);
+
+        return $fractorTestResult;
     }
 
     /**
