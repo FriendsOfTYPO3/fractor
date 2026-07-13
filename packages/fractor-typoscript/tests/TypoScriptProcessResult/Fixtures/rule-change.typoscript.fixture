@@ -1,0 +1,4 @@
+page = PAGE
+config.spamProtectEmailAddresses = ascii
+-----
+page = PAGE
