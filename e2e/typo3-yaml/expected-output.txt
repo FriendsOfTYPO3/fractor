@@ -9,9 +9,8 @@
    -
      options:
        recipients:
--        bar@domain.com: 'Bar'
 +        foo@domain.com: Bar
-+        bar@domain.com: Bar
+         bar@domain.com: Bar
        subject: 'Kontaktanfrage von Website'
 -      recipientAddress: foo@domain.com
 -      recipientName: Bar
@@ -32,9 +31,8 @@
    -
      options:
        recipients:
--        bar@domain.com: 'Bar'
 +        foo@domain.com: Bar
-+        bar@domain.com: Bar
+         bar@domain.com: Bar
        subject: 'Kontaktanfrage von Website'
 -      recipientAddress: foo@domain.com
 -      recipientName: Bar
@@ -70,8 +68,9 @@
     ----------- end diff -----------
 
 Applied rules:
+ * CodeFormatRule
  * EmailFinisherYamlFractor
 
 
- [OK] 1 file has been changed by Fractor
+ [OK] 1 file has been changed by Fractor                                        
 
