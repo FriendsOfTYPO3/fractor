@@ -1,6 +1,6 @@
 # Fractor XLIFF
 
-XLIFF extension for the [Fractor](https://github.com/andreaswolf/fractor) file refactoring tool.
+XLIFF extension for the [Fractor](https://github.com/friendsoftypo3/fractor) file refactoring tool.
 
 Allows validating and transforming XLIFF (XML Localization Interchange File Format) translation files.
 Supports XLIFF Versions 1.0, 1.1, 1.2 and 2.0.

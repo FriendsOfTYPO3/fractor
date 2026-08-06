@@ -36,5 +36,5 @@ This package is heavily inspired by [phpstan/extension-installer](https://github
 
 ## Development
 
-Development happens in the [Fractor monorepo on GitHub](https://github.com/andreaswolf/fractor/)
+Development happens in the [Fractor monorepo on GitHub](https://github.com/friendsoftypo3/fractor/)
 

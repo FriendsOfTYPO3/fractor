@@ -15,4 +15,4 @@ The rule will be tagged with 'fractor.fluid_rule' and be injected in the FluidFi
 
 ## Development
 
-Development happens in the [Fractor monorepo on GitHub](https://github.com/andreaswolf/fractor/)
+Development happens in the [Fractor monorepo on GitHub](https://github.com/friendsoftypo3/fractor/)

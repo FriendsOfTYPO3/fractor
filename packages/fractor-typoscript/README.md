@@ -12,4 +12,4 @@ composer require a9f/fractor-typoscript --dev
 
 ## Development
 
-Development happens in the [Fractor monorepo on GitHub](https://github.com/andreaswolf/fractor/)
+Development happens in the [Fractor monorepo on GitHub](https://github.com/friendsoftypo3/fractor/)

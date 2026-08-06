@@ -17,4 +17,4 @@ Have a look at all available rules [Overview of all rules](docs/composer-json-fr
 
 ## Development
 
-Development happens in the [Fractor monorepo on GitHub](https://github.com/andreaswolf/fractor/)
+Development happens in the [Fractor monorepo on GitHub](https://github.com/friendsoftypo3/fractor/)
