@@ -11,11 +11,10 @@ final class FractorApplication extends Application
 {
     public const NAME = 'Fractor';
 
-    public const FRACTOR_CONSOLE_VERSION = '1.0.0';
-
     public function __construct()
     {
-        parent::__construct(self::NAME, self::FRACTOR_CONSOLE_VERSION);
+        $fractorVersion = \Composer\InstalledVersions::getPrettyVersion('a9f/fractor') ?? 'dev';
+        parent::__construct(self::NAME, $fractorVersion);
         // run this command, if no command name is provided
         $this->setDefaultCommand('process');
     }
