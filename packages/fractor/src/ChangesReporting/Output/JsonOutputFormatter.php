@@ -25,11 +25,15 @@ final class JsonOutputFormatter implements OutputFormatterInterface
     {
         $errorsJson = [
             'totals' => [
-                'changed_files' => count($processResult->getFileDiffs()),
+                // getTotalChanged(), not count(getFileDiffs()): formatting-only
+                // changes carry an empty diff but are still written (see #432)
+                'changed_files' => $processResult->getTotalChanged(),
             ],
         ];
 
-        $fileDiffs = $processResult->getFileDiffs();
+        // Unfiltered: the changed_files list must agree with the totals above,
+        // so formatting-only changes (empty diff) are listed too
+        $fileDiffs = $processResult->getFileDiffs(false);
         ksort($fileDiffs);
         foreach ($fileDiffs as $fileDiff) {
             $filePath = $fileDiff->getRelativeFilePath();

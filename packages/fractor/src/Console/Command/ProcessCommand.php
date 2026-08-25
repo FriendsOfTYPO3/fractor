@@ -139,7 +139,9 @@ final class ProcessCommand extends Command
         if (! $configuration->isDryRun()) {
             return ExitCode::SUCCESS;
         }
-        if ($processResult->getFileDiffs() !== []) {
+        // getTotalChanged(), not getFileDiffs(): formatting-only changes carry
+        // an empty diff but are still written (see #432)
+        if ($processResult->getTotalChanged() > 0) {
             return ExitCode::CHANGED_CODE;
         }
         return ExitCode::SUCCESS;
