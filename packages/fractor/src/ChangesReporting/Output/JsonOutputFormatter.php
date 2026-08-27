@@ -23,11 +23,22 @@ final class JsonOutputFormatter implements OutputFormatterInterface
 
     public function report(ProcessResult $processResult, Configuration $configuration): void
     {
+        $systemErrors = $processResult->getSystemErrors();
+
         $errorsJson = [
             'totals' => [
                 'changed_files' => count($processResult->getFileDiffs()),
+                'errors' => count($systemErrors),
             ],
         ];
+
+        foreach ($systemErrors as $systemError) {
+            $errorsJson['errors'][] = [
+                'message' => $systemError->getMessage(),
+                'file' => $systemError->getRelativeFilePath(),
+                'caused_by' => $systemError->getProcessorClass(),
+            ];
+        }
 
         $fileDiffs = $processResult->getFileDiffs();
         ksort($fileDiffs);

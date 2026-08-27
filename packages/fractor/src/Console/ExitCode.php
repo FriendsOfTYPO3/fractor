@@ -14,4 +14,9 @@ final class ExitCode
      * @var int
      */
     public const CHANGED_CODE = 2;
+
+    /**
+     * @var int
+     */
+    public const FAILURE = Command::FAILURE;
 }

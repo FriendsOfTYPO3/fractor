@@ -135,6 +135,11 @@ final class ProcessCommand extends Command
      */
     private function resolveReturnCode(ProcessResult $processResult, Configuration $configuration): int
     {
+        // some system errors were found -> fail
+        if ($processResult->getSystemErrors() !== []) {
+            return ExitCode::FAILURE;
+        }
+
         // inverse error code for CI dry-run
         if (! $configuration->isDryRun()) {
             return ExitCode::SUCCESS;
