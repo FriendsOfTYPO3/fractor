@@ -44,9 +44,8 @@ final readonly class XliffFileProcessor implements FileProcessor
      */
     public function handle(File $file, iterable $appliedRules): void
     {
-        $document = $this->domDocumentFactory->create();
         $originalXml = $file->getOriginalContent();
-        $document->loadXML($originalXml);
+        $document = $this->domDocumentFactory->createFromXml($originalXml);
 
         // Normalize baseline formatting for clean diffs
         $oldXml = $this->saveXml($document);
