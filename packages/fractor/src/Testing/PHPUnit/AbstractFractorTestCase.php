@@ -28,6 +28,8 @@ abstract class AbstractFractorTestCase extends TestCase implements FractorTestIn
 
     private ?string $inputFilePath = null;
 
+    private ?FractorTestResult $fractorTestResult = null;
+
     private ?ContainerInterface $currentContainer = null;
 
     private FractorRunner $fractorRunner;
@@ -119,6 +121,22 @@ abstract class AbstractFractorTestCase extends TestCase implements FractorTestIn
     }
 
     /**
+     * Asserts that the file could not be processed, and that the reported reason
+     * contains the given text. Such a file is always left unchanged.
+     */
+    protected function assertThatFileCouldNotBeProcessed(string $expectedMessagePart): void
+    {
+        if (! $this->fractorTestResult instanceof FractorTestResult) {
+            self::fail('No file was processed yet');
+        }
+
+        $systemErrors = $this->fractorTestResult->getSystemErrors();
+        self::assertCount(1, $systemErrors, 'Expected exactly one file to fail');
+
+        self::assertStringContainsString($expectedMessagePart, $systemErrors[0]->getMessage());
+    }
+
+    /**
      * @param class-string<FractorRule> $rule
      */
     protected function assertThatRuleIsApplied(string $rule): void
@@ -147,6 +165,7 @@ abstract class AbstractFractorTestCase extends TestCase implements FractorTestIn
     ): void {
         // the file is now changed (if any rule matches)
         $fractorTestResult = $this->processFilePath($originalFilePath);
+        $this->fractorTestResult = $fractorTestResult;
         $changedContents = $fractorTestResult->getChangedContents();
 
         $fixtureFilename = basename($fixtureFilePath);

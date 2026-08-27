@@ -44,9 +44,8 @@ final readonly class XmlFileProcessor implements FileProcessor
     public function handle(File $file, iterable $appliedRules): void
     {
         $fileHasChanged = \false;
-        $document = $this->domDocumentFactory->create();
         $originalXml = $file->getOriginalContent();
-        $document->loadXML($originalXml);
+        $document = $this->domDocumentFactory->createFromXml($originalXml);
 
         // This is a hacky trick to keep format and create a nice diff later
         $oldXml = $this->saveXml($document);
