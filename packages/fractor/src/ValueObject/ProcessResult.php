@@ -6,18 +6,32 @@ namespace a9f\Fractor\ValueObject;
 
 use a9f\Fractor\Application\Contract\FractorRule;
 use a9f\Fractor\Differ\ValueObject\FileDiff;
+use a9f\Fractor\ValueObject\Error\SystemError;
 use Webmozart\Assert\Assert;
 
 final readonly class ProcessResult
 {
     /**
      * @param FileDiff[] $fileDiffs
+     * @param SystemError[] $systemErrors
      */
     public function __construct(
         private array $fileDiffs,
         private int $totalChanged,
+        private array $systemErrors = [],
     ) {
         Assert::allIsInstanceOf($this->fileDiffs, FileDiff::class);
+        Assert::allIsInstanceOf($this->systemErrors, SystemError::class);
+    }
+
+    /**
+     * Files that could not be processed and were left untouched.
+     *
+     * @return SystemError[]
+     */
+    public function getSystemErrors(): array
+    {
+        return $this->systemErrors;
     }
 
     /**

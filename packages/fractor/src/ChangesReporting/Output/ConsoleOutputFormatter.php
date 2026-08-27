@@ -7,6 +7,7 @@ namespace a9f\Fractor\ChangesReporting\Output;
 use a9f\Fractor\ChangesReporting\Contract\Output\OutputFormatterInterface;
 use a9f\Fractor\Configuration\ValueObject\Configuration;
 use a9f\Fractor\Differ\ValueObject\FileDiff;
+use a9f\Fractor\ValueObject\Error\SystemError;
 use a9f\Fractor\ValueObject\ProcessResult;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -32,6 +33,13 @@ final readonly class ConsoleOutputFormatter implements OutputFormatterInterface
     {
         if ($configuration->shouldShowDiffs()) {
             $this->reportFileDiffs($processResult->getFileDiffs(), false, $configuration->shouldShowChangelog());
+        }
+
+        $this->reportErrors($processResult->getSystemErrors());
+
+        // a failed run reports the errors instead of a success message
+        if ($processResult->getSystemErrors() !== []) {
+            return;
         }
 
         // to keep space between progress bar and success message
@@ -80,6 +88,24 @@ final readonly class ConsoleOutputFormatter implements OutputFormatterInterface
                 );
                 $this->symfonyStyle->newLine();
             }
+        }
+    }
+
+    /**
+     * @param SystemError[] $systemErrors
+     */
+    private function reportErrors(array $systemErrors): void
+    {
+        foreach ($systemErrors as $systemError) {
+            $message = \sprintf(
+                'Could not process "%s" file by "%s", due to: %s"%s".',
+                $systemError->getRelativeFilePath(),
+                $systemError->getProcessorShortClass(),
+                "\n",
+                $systemError->getMessage()
+            );
+
+            $this->symfonyStyle->error($message);
         }
     }
 

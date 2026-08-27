@@ -13,7 +13,9 @@ use a9f\Fractor\Configuration\ConfigurationRuleFilter;
 use a9f\Fractor\Configuration\ValueObject\Configuration;
 use a9f\Fractor\Differ\ValueObject\FileDiff;
 use a9f\Fractor\Differ\ValueObjectFactory\FileDiffFactory;
+use a9f\Fractor\FileSystem\FilePathHelper;
 use a9f\Fractor\FileSystem\FilesFinder;
+use a9f\Fractor\ValueObject\Error\SystemError;
 use a9f\Fractor\ValueObject\FileProcessResult;
 use a9f\Fractor\ValueObject\ProcessResult;
 use Nette\Utils\FileSystem;
@@ -39,7 +41,8 @@ final readonly class FractorRunner
         private RuleSkipper $ruleSkipper,
         private ProcessorSkipper $processorSkipper,
         private ChangedFilesDetector $changedFilesDetector,
-        private ConfigurationRuleFilter $configurationRuleFilter
+        private ConfigurationRuleFilter $configurationRuleFilter,
+        private FilePathHelper $filePathHelper
     ) {
         Assert::allIsInstanceOf($this->processors, FileProcessor::class);
     }
@@ -63,6 +66,9 @@ final readonly class FractorRunner
         /** @var FileDiff[] $fileDiffs */
         $fileDiffs = [];
 
+        /** @var SystemError[] $systemErrors */
+        $systemErrors = [];
+
         $totalChanged = 0;
         foreach ($filePaths as $filePath) {
             $file = new File($filePath, FileSystem::read($filePath));
@@ -71,18 +77,13 @@ final readonly class FractorRunner
             if ($shouldShowProgressBar) {
                 $this->symfonyStyle->progressAdvance();
             }
-            foreach ($this->processors as $processor) {
-                if ($this->processorSkipper->shouldSkip($processor::class)) {
-                    continue;
-                }
 
-                if (! $processor->canHandle($file)) {
-                    continue;
-                }
-
-                $applicableRules = $this->filterApplicableRules($processor->getAllRules(), $file);
-
-                $processor->handle($file, $applicableRules);
+            $systemError = $this->processFile($file);
+            if ($systemError instanceof SystemError) {
+                // The file never receives a diff below, so the writer skips it
+                // and a half-processed document cannot reach the disk.
+                $systemErrors[] = $systemError;
+                continue;
             }
 
             if (! $file->hasChanged()) {
@@ -113,7 +114,41 @@ final readonly class FractorRunner
             $this->fileWriter->write($file);
         }
 
-        return new ProcessResult($fileDiffs, $totalChanged);
+        return new ProcessResult($fileDiffs, $totalChanged, $systemErrors);
+    }
+
+    /**
+     * Runs every applicable processor for a single file.
+     *
+     * A processor that fails must not take the whole run down with it, so the
+     * failure is turned into a reportable error naming the file, and the file
+     * itself is left untouched.
+     */
+    private function processFile(File $file): ?SystemError
+    {
+        foreach ($this->processors as $processor) {
+            if ($this->processorSkipper->shouldSkip($processor::class)) {
+                continue;
+            }
+
+            if (! $processor->canHandle($file)) {
+                continue;
+            }
+
+            $applicableRules = $this->filterApplicableRules($processor->getAllRules(), $file);
+
+            try {
+                $processor->handle($file, $applicableRules);
+            } catch (\Throwable $throwable) {
+                return new SystemError(
+                    $throwable->getMessage(),
+                    $this->filePathHelper->relativePath($file->getFilePath()),
+                    $processor::class
+                );
+            }
+        }
+
+        return null;
     }
 
     /**
