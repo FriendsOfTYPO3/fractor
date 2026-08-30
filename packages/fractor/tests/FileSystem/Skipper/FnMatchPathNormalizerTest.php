@@ -12,11 +12,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class FnMatchPathNormalizerTest extends AbstractFractorTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
     #[DataProvider('providePaths')]
     public function testPaths(string $path, string $expectedNormalizedPath): void
     {
