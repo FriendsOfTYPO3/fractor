@@ -177,7 +177,7 @@ CODE_SAMPLE
             return true;
         }
 
-        if ($statement instanceof FileIncludeStatement && $statement->newSyntax === true) {
+        if ($statement instanceof FileIncludeStatement && $statement->newSyntax) {
             return true;
         }
 

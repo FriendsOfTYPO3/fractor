@@ -584,7 +584,7 @@ final class GenerateRuleCommandTest extends TestCase
         if (file_exists($path)) {
             $OK = true;
             if (! is_link($path) && is_dir($path)) {
-                if ($removeNonEmpty === true && ($handle = @opendir($path))) {
+                if ($removeNonEmpty && ($handle = @opendir($path))) {
                     $entries = [];
 
                     while (false !== ($file = readdir($handle))) {
