@@ -49,7 +49,7 @@ final readonly class FilePathNormalizer
             $path = $originalPath;
         }
 
-        $normalizedPath = self::normalizeDirectorySeparator((string) $path);
+        $normalizedPath = self::normalizeDirectorySeparator($path);
         $path = Strings::replace($normalizedPath, self::TWO_AND_MORE_SLASHES_REGEX, '/');
 
         $pathRoot = str_starts_with($path, '/') ? $directorySeparator : '';
