@@ -19,10 +19,7 @@ final readonly class SymfonyStyleFactory
 
     public function create(): FractorStyle
     {
-        // to prevent missing argv indexes
-        if (! isset($_SERVER['argv'])) {
-            $_SERVER['argv'] = [];
-        }
+        $_SERVER['argv'] ??= [];
 
         $argvInput = new ArgvInput();
         $consoleOutput = new ConsoleOutput();

@@ -45,9 +45,7 @@ final readonly class ProcessResult
 
         foreach ($this->fileDiffs as $fileDiff) {
             foreach ($fileDiff->getFractorClasses() as $fractorClass) {
-                if (! isset($ruleCounts[$fractorClass])) {
-                    $ruleCounts[$fractorClass] = 0;
-                }
+                $ruleCounts[$fractorClass] ??= 0;
 
                 ++$ruleCounts[$fractorClass];
             }
