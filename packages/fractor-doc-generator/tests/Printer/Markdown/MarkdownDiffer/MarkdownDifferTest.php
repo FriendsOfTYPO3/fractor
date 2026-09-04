@@ -20,4 +20,19 @@ final class MarkdownDifferTest extends AbstractTestCase
 ```
 ', $currentDiff);
     }
+
+    public function testKeepsUnchangedLinesAsContext(): void
+    {
+        $markdownDiffer = $this->getService(MarkdownDiffer::class);
+
+        $currentDiff = $markdownDiffer->diff("keep\nold\nkeep2\n", "keep\nnew\nkeep2\n");
+
+        self::assertSame('```diff
+ keep
+-old
++new
+ keep2
+```
+', $currentDiff);
+    }
 }

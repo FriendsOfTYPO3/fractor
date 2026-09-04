@@ -11,12 +11,6 @@ final readonly class MarkdownDiffer
 {
     /**
      * @var string
-     * @see https://regex101.com/r/LE9Xwo/1
-     */
-    private const METADATA_REGEX = '#^(.*\\n){1}#';
-
-    /**
-     * @var string
      * @see https://regex101.com/r/yf7u2L/1
      */
     private const SPACE_AND_NEWLINE_REGEX = '#( ){1,}\\n#';
@@ -33,14 +27,13 @@ final readonly class MarkdownDiffer
         }
 
         $diff = $this->differ->diff($old, $new);
-        $diff = $this->clearUnifiedDiffOutputFirstLine($diff);
         $diff = $this->removeTrailingWhitespaces($diff);
 
         return $this->warpToDiffCode($diff);
     }
 
     /**
-     * Removes UnifiedDiffOutputBuilder generated pre-spaces " \n" => "\n"
+     * Removes generated pre-spaces " \n" => "\n"
      */
     private function removeTrailingWhitespaces(string $diff): string
     {
@@ -51,10 +44,5 @@ final readonly class MarkdownDiffer
     private function warpToDiffCode(string $content): string
     {
         return '```diff' . \PHP_EOL . $content . \PHP_EOL . '```' . \PHP_EOL;
-    }
-
-    private function clearUnifiedDiffOutputFirstLine(string $diff): string
-    {
-        return Strings::replace($diff, self::METADATA_REGEX, '');
     }
 }
