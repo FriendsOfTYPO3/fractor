@@ -20,9 +20,9 @@
     ],
     "require": {
         "php": "^8.2",
-        "a9f/fractor": "^1.0",
-        "a9f/fractor-doc-generator": "^1.0",
-        "a9f/fractor-extension-installer": "^1.0",
+        "a9f/fractor": "^1.1",
+        "a9f/fractor-doc-generator": "^1.1",
+        "a9f/fractor-extension-installer": "^1.1",
         "ergebnis/json-printer": "^3.5",
         "nette/utils": "^4.0",
         "simonschaufi/composer-json-manipulator": "^1.0",

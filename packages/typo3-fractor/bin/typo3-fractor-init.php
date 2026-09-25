@@ -29,7 +29,7 @@ foreach ($autoloadPaths as $path) {
 
 (new SingleCommandApplication())
     ->setName('Initialize TYPO3-Fractor configuration')
-    ->setVersion('1.0.0')
+    ->setVersion('1.1.0')
     ->setDescription('Initializes a bare configuration to start with your TYPO3 upgrade')
     ->setCode(static function (InputInterface $input, OutputInterface $output): int {
         $projectDirectory = getcwd();
