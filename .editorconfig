@@ -12,6 +12,10 @@ insert_final_newline = true
 [tabs.txt]
 indent_style = tab
 
+# Text fixtures deliberately carry trailing whitespace to exercise reformatting
+[*.txt.fixture]
+trim_trailing_whitespace = false
+
 # YAML-Files
 [{*.yml,*.yaml,*.yml.fixture,*.yaml.fixture}]
 indent_size = 2

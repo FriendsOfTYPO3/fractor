@@ -79,7 +79,14 @@ final readonly class ConsoleOutputFormatter implements OutputFormatterInterface
             $message = \sprintf('<options=bold>%d) %s</>', ++$i, $filePath);
             $this->symfonyStyle->writeln($message);
             $this->symfonyStyle->newLine();
-            $this->symfonyStyle->writeln($fileDiff->getDiffConsoleFormatted());
+
+            // reformatting/normalization only: show a one-liner instead of dumping the whole file
+            if ($fileDiff->isCodeFormatOnly()) {
+                $this->symfonyStyle->writeln('    <fg=yellow>~ reformatted / normalized</>');
+                $this->symfonyStyle->newLine();
+            } else {
+                $this->symfonyStyle->writeln($fileDiff->getDiffConsoleFormatted());
+            }
 
             if ($fileDiff->getAppliedRules() !== []) {
                 $this->symfonyStyle->writeln('<options=underscore>Applied rules:</>');
@@ -137,7 +144,7 @@ final readonly class ConsoleOutputFormatter implements OutputFormatterInterface
         $this->symfonyStyle->section('Rules Summary');
 
         foreach ($ruleApplicationCounts as $ruleClass => $count) {
-            $ruleShortClass = (string) Strings::after($ruleClass, '\\', -1);
+            $ruleShortClass = Strings::after($ruleClass, '\\', -1) ?? $ruleClass;
             $this->symfonyStyle->writeln(sprintf(
                 ' * <info>%s</info> %s <comment>%d</comment> time%s',
                 $ruleShortClass,

@@ -79,13 +79,14 @@ final readonly class FileDiff
     {
         $fractorShortClasses = [];
         foreach ($this->getFractorClasses() as $fractorClass) {
-            $fractorShortClasses[] = (string) Strings::after($fractorClass, '\\', -1);
+            // fall back to the full identifier for labels without a namespace (e.g. the code-format rule)
+            $fractorShortClasses[] = Strings::after($fractorClass, '\\', -1) ?? $fractorClass;
         }
         return $fractorShortClasses;
     }
 
     /**
-     * @return array<class-string<FractorRule>>
+     * @return array<class-string<FractorRule>|AppliedRule::CODE_FORMAT_RULE>
      */
     public function getFractorClasses(): array
     {
@@ -96,6 +97,19 @@ final readonly class FileDiff
         $fractorClasses = array_unique($fractorClasses);
         sort($fractorClasses);
         return $fractorClasses;
+    }
+
+    public function isCodeFormatOnly(): bool
+    {
+        if ($this->appliedRules === []) {
+            return false;
+        }
+        foreach ($this->appliedRules as $appliedRule) {
+            if (! $appliedRule->isCodeFormat()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public function getFirstLineNumber(): ?int

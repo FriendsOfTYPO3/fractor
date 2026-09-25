@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace a9f\Fractor\Tests\Reporting\ChangelogExtractor;
 
+use a9f\Fractor\Application\ValueObject\AppliedRule;
 use a9f\Fractor\Reporting\ChangelogExtractor;
 use a9f\Fractor\Tests\Reporting\ChangelogExtractor\Fixture\RuleWithChangelog;
 use a9f\Fractor\Tests\Reporting\ChangelogExtractor\Fixture\RuleWithNoChangelog;
@@ -24,6 +25,13 @@ final class ChangelogExtractorTest extends TestCase
     {
         // Act & Assert
         self::assertNull($this->subject->extractChangelogFromRule(RuleWithNoChangelog::class));
+    }
+
+    #[Test]
+    public function virtualCodeFormatRuleIsToleratedWithoutReflection(): void
+    {
+        // the code-format label has no backing class; it must not be reflected on
+        self::assertNull($this->subject->extractChangelogFromRule(AppliedRule::CODE_FORMAT_RULE));
     }
 
     #[Test]

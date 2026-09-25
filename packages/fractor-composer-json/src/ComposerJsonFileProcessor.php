@@ -36,23 +36,28 @@ final readonly class ComposerJsonFileProcessor implements FileProcessor
 
     public function handle(File $file, iterable $appliedRules): void
     {
-        $fileHasChanged = \false;
+        $rawContent = $file->getContent();
         $composerJson = $this->composerJsonFactory->createFromFile($file);
-        $oldComposerJson = $this->composerJsonFactory->createFromFile($file);
 
         foreach ($appliedRules as $rule) {
+            $beforeArray = $composerJson->getJsonArray();
             $rule->refactor($composerJson);
 
-            if ($oldComposerJson->getJsonArray() !== $composerJson->getJsonArray()) {
-                $file->changeFileContent($this->composerJsonPrinter->printToString($this->indent, $composerJson));
+            if ($beforeArray !== $composerJson->getJsonArray()) {
                 $file->addAppliedRule(AppliedRule::fromRule($rule));
-                $fileHasChanged = \true;
             }
         }
 
-        if (! $fileHasChanged) {
+        // Always re-print: a formatting-only change (indentation) is then
+        // attributed to CodeFormatRule by the runner rather than applied silently.
+        $newContent = rtrim($this->composerJsonPrinter->printToString($this->indent, $composerJson)) . "\n";
+
+        if ($newContent === $rawContent) {
             $this->changedFilesDetector->addCachableFile($file->getFilePath());
+            return;
         }
+
+        $file->changeFileContent($newContent);
     }
 
     public function allowedFileExtensions(): array

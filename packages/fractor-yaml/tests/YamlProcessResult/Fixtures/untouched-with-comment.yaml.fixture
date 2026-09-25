@@ -1,0 +1,4 @@
+# this comment survives because no rule rewrites the file
+Form:
+  renderingOptions:
+    skinning: true

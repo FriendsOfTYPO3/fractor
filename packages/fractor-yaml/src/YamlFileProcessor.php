@@ -52,13 +52,17 @@ final readonly class YamlFileProcessor implements FileProcessor
             }
         }
 
-        // Nothing has changed.
+        // Never re-dump for formatting alone: the dumper drops comments, so
+        // untouched files stay byte-exact.
         if ($newYaml === $yaml) {
             $this->changedFilesDetector->addCachableFile($file->getFilePath());
             return;
         }
 
-        $file->changeFileContent($this->yamlDumper->dump($newYaml, $indent));
+        // Re-dumped original as baseline: the diff shows only the rule's change,
+        // any extra reformatting is attributed to CodeFormatRule by the runner.
+        $file->changeOriginalContent(rtrim($this->yamlDumper->dump($yaml, $indent)) . "\n");
+        $file->changeFileContent(rtrim($this->yamlDumper->dump($newYaml, $indent)) . "\n");
     }
 
     /**

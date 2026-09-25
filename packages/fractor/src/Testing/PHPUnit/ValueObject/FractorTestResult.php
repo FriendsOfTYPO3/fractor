@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace a9f\Fractor\Testing\PHPUnit\ValueObject;
 
 use a9f\Fractor\Application\Contract\FractorRule;
+use a9f\Fractor\Application\ValueObject\AppliedRule;
 use a9f\Fractor\ValueObject\Error\SystemError;
 use a9f\Fractor\ValueObject\ProcessResult;
 
@@ -30,7 +31,7 @@ final readonly class FractorTestResult
     }
 
     /**
-     * @return array<class-string<FractorRule>>
+     * @return array<class-string<FractorRule>|AppliedRule::CODE_FORMAT_RULE>
      */
     public function getAppliedFractorRules(): array
     {

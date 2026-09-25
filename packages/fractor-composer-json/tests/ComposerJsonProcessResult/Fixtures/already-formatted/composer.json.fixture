@@ -1,0 +1,6 @@
+{
+    "name": "acme/demo",
+    "require": {
+        "vendor1/keep": "^2.0"
+    }
+}
