@@ -17,7 +17,7 @@ unset FORCE_COLOR
 rm -r composer.lock vendor || true
 composer install
 
-for TEST_DIR in only-option rules-summary typo3-extension typo3-typoscript typo3-xml typo3-yaml
+for TEST_DIR in fatal-config fatal-config-chained fatal-config-json fatal-config-verbose only-option rules-summary typo3-extension typo3-typoscript typo3-xml typo3-yaml
 do
     set +x
     echo
