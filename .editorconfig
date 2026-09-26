@@ -16,6 +16,10 @@ indent_style = tab
 [*.txt.fixture]
 trim_trailing_whitespace = false
 
+# Expected error output of the e2e tests is compared exactly, including the padding of the error blocks
+[e2e/*/expected-error-output.txt]
+trim_trailing_whitespace = false
+
 # YAML-Files
 [{*.yml,*.yaml,*.yml.fixture,*.yaml.fixture}]
 indent_size = 2
