@@ -1,0 +1,7 @@
+
+ [ERROR] Outer message                                                                                                  
+         Symfony\Component\Console\Exception\RuntimeException in fractor.php line 8                                     
+
+ [ERROR] Inner cause                                                                                                    
+         LogicException in fractor.php line 6                                                                           
+

@@ -1,0 +1,9 @@
+
+ [ERROR] Outer message                                                                                                  
+         second line                                                                                                    
+         third line                                                                                                     
+
+ [ERROR] Middle cause                                                                                                   
+
+ [ERROR] Root � cause                                                                                                   
+

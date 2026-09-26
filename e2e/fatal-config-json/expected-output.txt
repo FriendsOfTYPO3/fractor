@@ -1,0 +1,1 @@
+{"fatal_errors":["Outer message\r\nsecond line","Root � cause in config/fractor.php"]}
