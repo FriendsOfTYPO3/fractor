@@ -103,7 +103,7 @@ final class ProcessCommand extends Command
     {
         // missing config? add it :)
         if (! $this->configInitializer->areSomeFractorsLoaded()) {
-            $this->configInitializer->createConfig((string) getcwd());
+            $this->configInitializer->createConfig((string) getcwd(), (bool) $input->getOption(Option::DRY_RUN));
             return self::SUCCESS;
         }
 

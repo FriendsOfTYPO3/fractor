@@ -7,6 +7,7 @@ namespace a9f\Fractor\Kernel;
 use a9f\Fractor\Application\Contract\FractorRule;
 use a9f\Fractor\Configuration\FractorConfiguration;
 use a9f\Fractor\Configuration\FractorConfigurationBuilder;
+use a9f\Fractor\Configuration\Option;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,6 +29,12 @@ final class ContainerBuilderBuilder
             $containerBuilder->addCompilerPass(new AddConsoleCommandPass());
             $containerBuilder->registerForAutoconfiguration(FractorRule::class)->addTag(FractorRule::class);
 
+            // escaped, so that a "%" in the path is not read as a parameter placeholder
+            $containerBuilder->setParameter(
+                Option::MAIN_CONFIG_FILE,
+                $containerBuilder->getParameterBag()
+                    ->escapeValue($fractorConfigFile)
+            );
             $fractorConfigFile ??= __DIR__ . '/../../config/fractor.php';
 
             $this->loadFractorConfigFile($fractorConfigFile, $containerBuilder, $configurationBuilder);

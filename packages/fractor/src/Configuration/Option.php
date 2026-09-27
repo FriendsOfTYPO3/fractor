@@ -73,6 +73,11 @@ final class Option
 
     public const REGISTERED_FRACTOR_RULES = 'registered_fractor_rules';
 
+    /**
+     * @internal the config file given with --config, or the fractor.php found in the working directory; null if neither exists
+     */
+    public const MAIN_CONFIG_FILE = 'main_config_file';
+
     public const OPTIONS = 'options';
 
     /**

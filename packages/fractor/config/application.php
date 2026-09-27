@@ -12,6 +12,7 @@ use a9f\Fractor\Configuration\AllowedFileExtensionsResolver;
 use a9f\Fractor\Configuration\ConfigInitializer;
 use a9f\Fractor\Configuration\ConfigurationRuleFilter;
 use a9f\Fractor\Configuration\OnlyRuleResolver;
+use a9f\Fractor\Configuration\Option;
 use a9f\Fractor\Configuration\SkipConfigurationFactory;
 use a9f\Fractor\Configuration\ValueObject\SkipConfiguration;
 use a9f\Fractor\Console\Application\FractorApplication;
@@ -32,6 +33,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ContainerBag;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
@@ -132,7 +134,8 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
 
     // tagged services
     $services->set(ConfigInitializer::class)
-        ->arg('$fractors', tagged_iterator(FractorRule::class));
+        ->arg('$fractors', tagged_iterator(FractorRule::class))
+        ->arg('$mainConfigFile', param(Option::MAIN_CONFIG_FILE));
 
     $services->set(OnlyRuleResolver::class)
         ->arg('$fractors', tagged_iterator(FractorRule::class));
