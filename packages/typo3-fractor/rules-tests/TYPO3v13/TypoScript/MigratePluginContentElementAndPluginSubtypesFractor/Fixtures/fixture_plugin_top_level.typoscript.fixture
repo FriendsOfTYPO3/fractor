@@ -1,0 +1,5 @@
+tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
+-----
+tt_content.examples_pi1 =< lib.contentElement
+tt_content.examples_pi1.20 < plugin.tx_examples_pi1
+tt_content.examples_pi1.templateName = Generic
