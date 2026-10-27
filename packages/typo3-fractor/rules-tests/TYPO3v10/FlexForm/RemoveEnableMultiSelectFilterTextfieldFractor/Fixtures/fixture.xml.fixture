@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<sheetTitle>Sheet Title</sheetTitle>
+				<type>array</type>
+				<el>
+					<tsconfig_includes>
+						<config>
+							<type>select</type>
+							<renderType>selectMultipleSideBySide</renderType>
+							<size>10</size>
+							<enableMultiSelectFilterTextfield>1</enableMultiSelectFilterTextfield>
+						</config>
+					</tsconfig_includes>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>
+-----
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<sheetTitle>Sheet Title</sheetTitle>
+				<type>array</type>
+				<el>
+					<tsconfig_includes>
+						<config>
+							<type>select</type>
+							<renderType>selectMultipleSideBySide</renderType>
+							<size>10</size>
+						</config>
+					</tsconfig_includes>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

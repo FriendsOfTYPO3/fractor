@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use a9f\Typo3Fractor\TYPO3v10\FlexForm\RemoveEnableMultiSelectFilterTextfieldFractor;
 use a9f\Typo3Fractor\TYPO3v10\Fluid\RemoveNoCacheHashAndUseCacheHashAttributeFluidFractor;
 use a9f\Typo3Fractor\TYPO3v10\TypoScript\MigrateLegacyTypoScriptConditionsFractor;
 use a9f\Typo3Fractor\TYPO3v10\TypoScript\MigrateTypoScriptMultipleConditionBracketsFractor;
@@ -60,4 +61,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(RemoveConfigTypolinkEnableLinksAcrossDomainsFractor::class);
     $services->set(RemoveConfigUsernameSubstTokenFractor::class);
     $services->set(RemoveConfigUseruidSubstTokenFractor::class);
+    $services->set(RemoveEnableMultiSelectFilterTextfieldFractor::class);
 };
