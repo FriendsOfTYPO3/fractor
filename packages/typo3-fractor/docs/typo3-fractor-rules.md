@@ -1,4 +1,4 @@
-# 70 Rules Overview
+# 71 Rules Overview
 
 ## AbstractMessageGetSeverityFluidFractor
 
@@ -1184,6 +1184,37 @@ Remove mod.web_list.noViewWithDokTypes
 ```diff
 -mod.web_list.noViewWithDokTypes = 1
 +-
+```
+
+<br>
+
+## RemoveEnableMultiSelectFilterTextfieldFractor
+
+Remove `\"enableMultiSelectFilterTextfield\" => true` as its default from render type \"selectMultipleSideBySide\"
+
+- class: [`a9f\Typo3Fractor\TYPO3v10\FlexForm\RemoveEnableMultiSelectFilterTextfieldFractor`](../rules/TYPO3v10/FlexForm/RemoveEnableMultiSelectFilterTextfieldFractor.php)
+
+```diff
+ <T3DataStructure>
+     <sheets>
+         <sDEF>
+             <ROOT>
+                 <sheetTitle>Sheet Title</sheetTitle>
+                 <type>array</type>
+                 <el>
+                     <tsconfig_includes>
+                         <config>
+                             <type>select</type>
+                             <renderType>selectMultipleSideBySide</renderType>
+                             <size>10</size>
+-                            <enableMultiSelectFilterTextfield>1</enableMultiSelectFilterTextfield>
+                         </config>
+                     </tsconfig_includes>
+                 </el>
+             </ROOT>
+         </sDEF>
+     </sheets>
+ </T3DataStructure>
 ```
 
 <br>
