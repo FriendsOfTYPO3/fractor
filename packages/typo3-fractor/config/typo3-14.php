@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use a9f\Typo3Fractor\TYPO3v14\Fluid\ChangeLogoutHandlingInFeLoginFractor;
+use a9f\Typo3Fractor\TYPO3v14\Fluid\ReplaceUseNonceArgumentInAssetViewHelpersFractor;
 use a9f\Typo3Fractor\TYPO3v14\Htaccess\RemoveUploadsFromDefaultHtaccessFractor;
 use a9f\Typo3Fractor\TYPO3v14\TypoScript\MigrateTypoScriptConditionGetTSFEFractor;
 use a9f\Typo3Fractor\TYPO3v14\TypoScript\MigrateTypoScriptGetDataPathFractor;
@@ -32,4 +33,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(RemoveUserTSConfigAuthBeRedirectToURLFractor::class);
     $services->set(RemoveDuplicateDoktypeRestrictionConfigurationFractor::class);
     $services->set(MigrateLegacyFormTemplatesFractor::class);
+    $services->set(ReplaceUseNonceArgumentInAssetViewHelpersFractor::class);
 };

@@ -1,0 +1,4 @@
+<my:asset.script useNonce="1" />
+<f:link.page useNonce="1">Link</f:link.page>
+{f:format.raw(useNonce: 1)}
+<f:asset.script identifier="already-migrated" csp="1" />

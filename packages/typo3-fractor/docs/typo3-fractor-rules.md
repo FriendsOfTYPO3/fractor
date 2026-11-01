@@ -1,4 +1,4 @@
-# 71 Rules Overview
+# 72 Rules Overview
 
 ## AbstractMessageGetSeverityFluidFractor
 
@@ -1514,6 +1514,23 @@ Replace f:case with default attribute by f:defaultCase
 -    <f:case default="true">bar</f:case>
 +    <f:defaultCase>bar</f:defaultCase>
  </f:switch>
+```
+
+<br>
+
+## ReplaceUseNonceArgumentInAssetViewHelpersFractor
+
+Replace the useNonce argument of f:asset.script and f:asset.css with csp
+
+- class: [`a9f\Typo3Fractor\TYPO3v14\Fluid\ReplaceUseNonceArgumentInAssetViewHelpersFractor`](../rules/TYPO3v14/Fluid/ReplaceUseNonceArgumentInAssetViewHelpersFractor.php)
+
+```diff
+-<f:asset.script identifier="my-script" src="EXT:my_ext/Resources/Public/JavaScript/foo.js" useNonce="1" />
+-<f:asset.css identifier="my-style" href="EXT:my_ext/Resources/Public/Css/foo.css" useNonce="1" />
+-{f:asset.script(identifier: 'my-script', src: 'EXT:my_ext/Resources/Public/JavaScript/foo.js', useNonce: 1)}
++<f:asset.script identifier="my-script" src="EXT:my_ext/Resources/Public/JavaScript/foo.js" csp="1" />
++<f:asset.css identifier="my-style" href="EXT:my_ext/Resources/Public/Css/foo.css" csp="1" />
++{f:asset.script(identifier: 'my-script', src: 'EXT:my_ext/Resources/Public/JavaScript/foo.js', csp: 1)}
 ```
 
 <br>

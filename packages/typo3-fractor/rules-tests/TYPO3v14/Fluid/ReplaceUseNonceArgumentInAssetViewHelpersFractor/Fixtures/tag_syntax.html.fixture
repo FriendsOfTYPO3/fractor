@@ -1,0 +1,23 @@
+<f:asset.script identifier="my-script" src="EXT:my_ext/Resources/Public/JavaScript/foo.js" useNonce="1" />
+<f:asset.css identifier="my-style" href="EXT:my_ext/Resources/Public/Css/foo.css" useNonce="{settings.useNonce}" />
+<f:asset.script
+    identifier="multi-line"
+    useNonce="true"
+    src="EXT:my_ext/Resources/Public/JavaScript/bar.js"
+/>
+<f:asset.script identifier="inline-script" useNonce="1">
+    if (a > b) { console.log('useNonce="1"'); }
+</f:asset.script>
+<f:asset.css identifier="both" href="EXT:my_ext/Resources/Public/Css/both.css" useNonce="1" csp="1" />
+-----
+<f:asset.script identifier="my-script" src="EXT:my_ext/Resources/Public/JavaScript/foo.js" csp="1" />
+<f:asset.css identifier="my-style" href="EXT:my_ext/Resources/Public/Css/foo.css" csp="{settings.useNonce}" />
+<f:asset.script
+    identifier="multi-line"
+    csp="true"
+    src="EXT:my_ext/Resources/Public/JavaScript/bar.js"
+/>
+<f:asset.script identifier="inline-script" csp="1">
+    if (a > b) { console.log('useNonce="1"'); }
+</f:asset.script>
+<f:asset.css identifier="both" href="EXT:my_ext/Resources/Public/Css/both.css" csp="1" />

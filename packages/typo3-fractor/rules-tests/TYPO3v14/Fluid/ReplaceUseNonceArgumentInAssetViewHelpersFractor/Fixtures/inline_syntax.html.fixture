@@ -1,0 +1,7 @@
+{f:asset.script(identifier: 'my-script', src: 'EXT:my_ext/Resources/Public/JavaScript/foo.js', useNonce: 1)}
+{f:asset.css(identifier: 'my-style', href: '{f:uri.resource(path: \'Css/foo.css\')}', useNonce: '1')}
+{f:asset.script(useNonce: 1, identifier: 'first')}
+-----
+{f:asset.script(identifier: 'my-script', src: 'EXT:my_ext/Resources/Public/JavaScript/foo.js', csp: 1)}
+{f:asset.css(identifier: 'my-style', href: '{f:uri.resource(path: \'Css/foo.css\')}', csp: '1')}
+{f:asset.script(csp: 1, identifier: 'first')}
