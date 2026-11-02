@@ -1,0 +1,55 @@
+prototypes:
+  standard:
+    formElementsDefinition:
+      MyElement:
+        formEditor:
+          label: 'My element'
+          editors:
+            200:
+              identifier: placeholder
+              label: Placeholder
+              fieldExplanationText: 'Enter the placeholder text'
+              propertyPath: properties.placeholder
+          propertyCollections:
+            validators:
+              10:
+                identifier: StringLength
+                editors:
+                  200:
+                    identifier: minimum
+                    fieldExplanationText: 'Minimum length'
+            finishers:
+              10:
+                identifier: EmailToReceiver
+                editors:
+                  300:
+                    identifier: subject
+                    fieldExplanationText: 'Subject of the mail'
+-----
+prototypes:
+  standard:
+    formElementsDefinition:
+      MyElement:
+        formEditor:
+          label: 'My element'
+          editors:
+            200:
+              identifier: placeholder
+              label: Placeholder
+              description: 'Enter the placeholder text'
+              propertyPath: properties.placeholder
+          propertyCollections:
+            validators:
+              10:
+                identifier: StringLength
+                editors:
+                  200:
+                    identifier: minimum
+                    description: 'Minimum length'
+            finishers:
+              10:
+                identifier: EmailToReceiver
+                editors:
+                  300:
+                    identifier: subject
+                    description: 'Subject of the mail'

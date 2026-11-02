@@ -1,0 +1,33 @@
+prototypes:
+  standard:
+    validatorsDefinition:
+      MyValidator:
+        formEditor:
+          editors:
+            100:
+              identifier: header
+              fieldExplanationText: 'Explains the validator'
+    finishersDefinition:
+      MyFinisher:
+        formEditor:
+          editors:
+            100:
+              identifier: header
+              fieldExplanationText: 'Explains the finisher'
+-----
+prototypes:
+  standard:
+    validatorsDefinition:
+      MyValidator:
+        formEditor:
+          editors:
+            100:
+              identifier: header
+              description: 'Explains the validator'
+    finishersDefinition:
+      MyFinisher:
+        formEditor:
+          editors:
+            100:
+              identifier: header
+              description: 'Explains the finisher'
