@@ -1,4 +1,4 @@
-# 74 Rules Overview
+# 75 Rules Overview
 
 ## AbstractMessageGetSeverityFluidFractor
 
@@ -1434,6 +1434,19 @@ Remove auth.BE.redirectToURL
 
 ```diff
 -auth.BE.redirectToURL = 1
++-
+```
+
+<br>
+
+## RemoveUserTSConfigDoktypesToShowInNewPageDragAreaFractor
+
+Remove options.pageTree.doktypesToShowInNewPageDragArea
+
+- class: [`a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveUserTSConfigDoktypesToShowInNewPageDragAreaFractor`](../rules/TYPO3v14/TypoScript/RemoveUserTSConfigDoktypesToShowInNewPageDragAreaFractor.php)
+
+```diff
+-options.pageTree.doktypesToShowInNewPageDragArea = 1
 +-
 ```
 
