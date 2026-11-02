@@ -1,0 +1,12 @@
+options {
+    pageTree {
+        doktypesToShowInNewPageDragArea = 1,6,4
+        showPageIdWithTitle = 1
+    }
+}
+-----
+options {
+    pageTree {
+        showPageIdWithTitle = 1
+    }
+}

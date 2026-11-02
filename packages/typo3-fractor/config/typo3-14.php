@@ -13,6 +13,7 @@ use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveExternalOptionFromTypoScriptFract
 use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveFrontendAssetConcatenationAndCompressionFractor;
 use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveModWebLayoutDefLangBindingFractor;
 use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveUserTSConfigAuthBeRedirectToURLFractor;
+use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveUserTSConfigDoktypesToShowInNewPageDragAreaFractor;
 use a9f\Typo3Fractor\TYPO3v14\Yaml\MigrateLegacyFormTemplatesFractor;
 use a9f\Typo3Fractor\TYPO3v14\Yaml\ReplaceDatePickerFormElementWithDateFractor;
 use a9f\Typo3Fractor\TYPO3v14\Yaml\ReplaceFieldExplanationTextWithDescriptionFractor;
@@ -38,4 +39,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(ReplaceUseNonceArgumentInAssetViewHelpersFractor::class);
     $services->set(ReplaceFieldExplanationTextWithDescriptionFractor::class);
     $services->set(ReplaceDatePickerFormElementWithDateFractor::class);
+    $services->set(RemoveUserTSConfigDoktypesToShowInNewPageDragAreaFractor::class);
 };

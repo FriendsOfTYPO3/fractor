@@ -1,0 +1,4 @@
+options.pageTree.doktypesToShowInNewPageDragArea = 1,6,4
+options.pageTree.showPageIdWithTitle = 1
+-----
+options.pageTree.showPageIdWithTitle = 1
