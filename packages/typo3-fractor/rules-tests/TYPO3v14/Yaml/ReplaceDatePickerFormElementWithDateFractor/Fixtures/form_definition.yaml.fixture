@@ -1,0 +1,80 @@
+type: Form
+identifier: contact
+label: Contact
+prototypeName: standard
+renderables:
+  -
+    type: Page
+    identifier: page-1
+    label: Step
+    renderables:
+      -
+        type: DatePicker
+        identifier: date-1
+        label: 'Pick a date'
+        properties:
+          dateFormat: Y-m-d
+          enableDatePicker: true
+      -
+        type: DatePicker
+        identifier: date-2
+        label: 'Arrival'
+        properties:
+          dateFormat: d.m.Y
+          enableDatePicker: false
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          -
+            identifier: NotEmpty
+        variants:
+          -
+            identifier: hide-on-summary
+            condition: 'stepType == "SummaryPage"'
+            properties:
+              dateFormat: Y-m-d
+            renderingOptions:
+              enabled: false
+      -
+        type: Text
+        identifier: text-1
+        label: Name
+        properties:
+          dateFormat: 'not a date picker'
+-----
+type: Form
+identifier: contact
+label: Contact
+prototypeName: standard
+renderables:
+  -
+    type: Page
+    identifier: page-1
+    label: Step
+    renderables:
+      -
+        type: Date
+        identifier: date-1
+        label: 'Pick a date'
+      -
+        type: Date
+        identifier: date-2
+        label: Arrival
+        properties:
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          -
+            identifier: NotEmpty
+        variants:
+          -
+            identifier: hide-on-summary
+            condition: 'stepType == "SummaryPage"'
+            renderingOptions:
+              enabled: false
+      -
+        type: Text
+        identifier: text-1
+        label: Name
+        properties:
+          dateFormat: 'not a date picker'
