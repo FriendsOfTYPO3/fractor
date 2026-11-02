@@ -1,0 +1,8 @@
+type: Form
+identifier: contact
+renderables:
+  -
+    type: Page
+    identifier: page-1
+    properties:
+      fieldExplanationText: 'Not part of the form editor configuration'

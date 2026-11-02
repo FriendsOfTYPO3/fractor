@@ -14,6 +14,7 @@ use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveFrontendAssetConcatenationAndComp
 use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveModWebLayoutDefLangBindingFractor;
 use a9f\Typo3Fractor\TYPO3v14\TypoScript\RemoveUserTSConfigAuthBeRedirectToURLFractor;
 use a9f\Typo3Fractor\TYPO3v14\Yaml\MigrateLegacyFormTemplatesFractor;
+use a9f\Typo3Fractor\TYPO3v14\Yaml\ReplaceFieldExplanationTextWithDescriptionFractor;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -34,4 +35,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(RemoveDuplicateDoktypeRestrictionConfigurationFractor::class);
     $services->set(MigrateLegacyFormTemplatesFractor::class);
     $services->set(ReplaceUseNonceArgumentInAssetViewHelpersFractor::class);
+    $services->set(ReplaceFieldExplanationTextWithDescriptionFractor::class);
 };

@@ -1,4 +1,4 @@
-# 72 Rules Overview
+# 73 Rules Overview
 
 ## AbstractMessageGetSeverityFluidFractor
 
@@ -1514,6 +1514,28 @@ Replace f:case with default attribute by f:defaultCase
 -    <f:case default="true">bar</f:case>
 +    <f:defaultCase>bar</f:defaultCase>
  </f:switch>
+```
+
+<br>
+
+## ReplaceFieldExplanationTextWithDescriptionFractor
+
+Replace fieldExplanationText with description in the form editor configuration
+
+- class: [`a9f\Typo3Fractor\TYPO3v14\Yaml\ReplaceFieldExplanationTextWithDescriptionFractor`](../rules/TYPO3v14/Yaml/ReplaceFieldExplanationTextWithDescriptionFractor.php)
+
+```diff
+ prototypes:
+   standard:
+     formElementsDefinition:
+       MyElement:
+         formEditor:
+           editors:
+             200:
+               identifier: placeholder
+               label: Placeholder
+-              fieldExplanationText: 'Enter the placeholder text'
++              description: 'Enter the placeholder text'
 ```
 
 <br>

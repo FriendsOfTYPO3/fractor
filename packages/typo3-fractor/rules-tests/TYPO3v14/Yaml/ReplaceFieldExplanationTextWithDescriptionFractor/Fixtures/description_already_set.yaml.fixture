@@ -1,0 +1,20 @@
+prototypes:
+  standard:
+    formElementsDefinition:
+      MyElement:
+        formEditor:
+          editors:
+            200:
+              identifier: placeholder
+              description: 'New text'
+              fieldExplanationText: 'Old text'
+-----
+prototypes:
+  standard:
+    formElementsDefinition:
+      MyElement:
+        formEditor:
+          editors:
+            200:
+              identifier: placeholder
+              description: 'New text'
