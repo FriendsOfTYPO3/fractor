@@ -1,4 +1,4 @@
-# 73 Rules Overview
+# 74 Rules Overview
 
 ## AbstractMessageGetSeverityFluidFractor
 
@@ -1514,6 +1514,25 @@ Replace f:case with default attribute by f:defaultCase
 -    <f:case default="true">bar</f:case>
 +    <f:defaultCase>bar</f:defaultCase>
  </f:switch>
+```
+
+<br>
+
+## ReplaceDatePickerFormElementWithDateFractor
+
+Replace the DatePicker form element with the Date form element and remove its dateFormat and enableDatePicker properties. The Date element renders a native HTML5 date input, so the browser now formats the date and shows the picker.
+
+- class: [`a9f\Typo3Fractor\TYPO3v14\Yaml\ReplaceDatePickerFormElementWithDateFractor`](../rules/TYPO3v14/Yaml/ReplaceDatePickerFormElementWithDateFractor.php)
+
+```diff
+-type: DatePicker
++type: Date
+ identifier: date-1
+-label: 'Pick a date'
+-properties:
+-  dateFormat: Y-m-d
+-  enableDatePicker: true
++label: 'Pick a date'
 ```
 
 <br>

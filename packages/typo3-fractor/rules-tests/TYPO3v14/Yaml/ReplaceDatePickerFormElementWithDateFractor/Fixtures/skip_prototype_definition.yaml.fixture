@@ -1,0 +1,7 @@
+prototypes:
+  standard:
+    formElementsDefinition:
+      DatePicker:
+        properties:
+          dateFormat: Y-m-d
+          enableDatePicker: true
