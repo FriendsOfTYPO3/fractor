@@ -15,6 +15,7 @@ use a9f\Fractor\Console\Application\FractorApplication;
 use a9f\Fractor\Console\ExitCode;
 use a9f\Fractor\Console\Output\OutputFormatterCollector;
 use a9f\Fractor\Exception\ShouldNotHappenException;
+use a9f\Fractor\StaticReflection\DynamicSourceLocatorDecorator;
 use a9f\Fractor\Util\MemoryLimiter;
 use a9f\Fractor\ValueObject\ProcessResult;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -23,6 +24,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(name: 'process', description: 'Runs Fractor with the given configuration file')]
 final class ProcessCommand extends Command
@@ -33,7 +35,9 @@ final class ProcessCommand extends Command
         private readonly OutputFormatterCollector $outputFormatterCollector,
         private readonly ConfigInitializer $configInitializer,
         private readonly MemoryLimiter $memoryLimiter,
-        private readonly ConfigurationRuleFilter $configurationRuleFilter
+        private readonly ConfigurationRuleFilter $configurationRuleFilter,
+        private readonly SymfonyStyle $symfonyStyle,
+        private readonly DynamicSourceLocatorDecorator $dynamicSourceLocatorDecorator
     ) {
         parent::__construct();
     }
@@ -108,6 +112,29 @@ final class ProcessCommand extends Command
         }
 
         $configuration = $this->configurationFactory->createFromInput($input);
+        $paths = $configuration->getPaths();
+
+        $this->dynamicSourceLocatorDecorator->addPaths($paths);
+        if ($this->dynamicSourceLocatorDecorator->arePathsEmpty()) {
+            if ($paths === []) {
+                $this->symfonyStyle->error(
+                    'Provide paths to process, either via withPaths() in the Fractor config or as command argument.'
+                );
+                return self::FAILURE;
+            }
+
+            $isSingular = count($paths) === 1;
+            $this->symfonyStyle->error(sprintf(
+                'The following given path%s do%s not match any file%s or director%s: %s%s',
+                $isSingular ? '' : 's',
+                $isSingular ? 'es' : '',
+                $isSingular ? '' : 's',
+                $isSingular ? 'y' : 'ies',
+                "\n\n - ",
+                implode("\n - ", $paths)
+            ));
+            return self::FAILURE;
+        }
 
         $this->memoryLimiter->adjust($configuration);
         $this->configurationRuleFilter->setConfiguration($configuration);
