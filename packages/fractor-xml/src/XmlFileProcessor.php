@@ -61,6 +61,7 @@ final readonly class XmlFileProcessor implements FileProcessor
         $newXml = rtrim($this->formatter->format($this->indent, $newXml)) . "\n";
 
         if ($newXml === $originalXml) {
+            $this->changedFilesDetector->addCachableFile($file->getFilePath());
             return;
         }
 

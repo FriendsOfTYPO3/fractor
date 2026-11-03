@@ -50,6 +50,7 @@ final readonly class FractorRunner
 
     public function run(Configuration $configuration): ProcessResult
     {
+        $this->changedFilesDetector->setActiveScope($configuration->getOnlyRule());
         $filePaths = $this->fileFinder->findFilesInPaths($configuration->getPaths(), $configuration);
 
         // no files found

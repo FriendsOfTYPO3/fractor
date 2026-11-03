@@ -19,11 +19,21 @@ final class ChangedFilesDetector
      */
     private array $cachableFiles = [];
 
+    private string $scopeSuffix = '';
+
     public function __construct(
         private readonly FileHashComputer $fileHashComputer,
         private readonly Cache $cache,
         private readonly FileHasher $fileHasher
     ) {
+    }
+
+    /**
+     * Gives an --only run its own cache entries, so it cannot mark files as unchanged for a full run.
+     */
+    public function setActiveScope(?string $onlyRule): void
+    {
+        $this->scopeSuffix = $onlyRule === null ? '' : '|only:' . $onlyRule;
     }
 
     public function cacheFile(string $filePath): void
@@ -87,7 +97,7 @@ final class ChangedFilesDetector
 
     private function getFilePathCacheKey(string $filePath): string
     {
-        return $this->fileHasher->hash($this->resolvePath($filePath));
+        return $this->fileHasher->hash($this->resolvePath($filePath) . $this->scopeSuffix);
     }
 
     private function hashFile(string $filePath): string
