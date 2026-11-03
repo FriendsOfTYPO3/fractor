@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace a9f\FractorXliff\Tests\XliffProcessResult;
 
 use a9f\Fractor\Application\ValueObject\AppliedRule;
+use a9f\Fractor\Caching\Detector\ChangedFilesDetector;
 use a9f\Fractor\Testing\PHPUnit\AbstractFractorTestCase;
 use a9f\FractorXliff\Tests\Fixtures\DummyXliffFractorRule;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -45,6 +46,14 @@ final class XliffProcessResultTest extends AbstractFractorTestCase
             [AppliedRule::CODE_FORMAT_RULE, DummyXliffFractorRule::class],
         ];
         yield 'already formatted file reports no change' => ['already-formatted.xlf.fixture', []];
+    }
+
+    public function testAlreadyFormattedFileIsCachedForTheNextRun(): void
+    {
+        $this->doTestFile(__DIR__ . '/Fixtures/already-formatted.xlf.fixture');
+
+        $changedFilesDetector = $this->getService(ChangedFilesDetector::class);
+        self::assertFalse($changedFilesDetector->hasFileChanged(__DIR__ . '/Fixtures/already-formatted.xlf'));
     }
 
     public function provideConfigFilePath(): string

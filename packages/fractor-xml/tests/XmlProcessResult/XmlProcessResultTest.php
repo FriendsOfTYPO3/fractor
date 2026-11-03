@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace a9f\FractorXml\Tests\XmlProcessResult;
 
 use a9f\Fractor\Application\ValueObject\AppliedRule;
+use a9f\Fractor\Caching\Detector\ChangedFilesDetector;
 use a9f\Fractor\Testing\PHPUnit\AbstractFractorTestCase;
 use a9f\FractorXml\Tests\Fixtures\DummyXmlFractorRule;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -42,6 +43,14 @@ final class XmlProcessResultTest extends AbstractFractorTestCase
             [AppliedRule::CODE_FORMAT_RULE, DummyXmlFractorRule::class],
         ];
         yield 'already formatted file reports no change' => ['already-formatted.xml.fixture', []];
+    }
+
+    public function testAlreadyFormattedFileIsCachedForTheNextRun(): void
+    {
+        $this->doTestFile(__DIR__ . '/Fixtures/already-formatted.xml.fixture');
+
+        $changedFilesDetector = $this->getService(ChangedFilesDetector::class);
+        self::assertFalse($changedFilesDetector->hasFileChanged(__DIR__ . '/Fixtures/already-formatted.xml'));
     }
 
     public function provideConfigFilePath(): string

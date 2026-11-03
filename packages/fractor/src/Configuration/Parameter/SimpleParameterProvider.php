@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace a9f\Fractor\Configuration\Parameter;
 
+use a9f\Fractor\Configuration\Option;
 use a9f\Fractor\Exception\ShouldNotHappenException;
 use Webmozart\Assert\Assert;
 
@@ -108,8 +109,10 @@ final class SimpleParameterProvider
      */
     public static function hash(): string
     {
-        $parameterKeys = self::$parameters;
-        return \sha1(\serialize($parameterKeys));
+        $parameters = self::$parameters;
+        // cache entries are keyed by absolute file path, so the paths to scan do not affect their validity
+        unset($parameters[Option::PATHS]);
+        return \sha1(\serialize($parameters));
     }
 
     /**

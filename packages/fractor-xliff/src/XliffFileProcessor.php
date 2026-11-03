@@ -68,6 +68,7 @@ final readonly class XliffFileProcessor implements FileProcessor
 
         // Compare against raw original to detect formatting changes too
         if ($newXml === $originalXml) {
+            $this->changedFilesDetector->addCachableFile($file->getFilePath());
             return;
         }
 
