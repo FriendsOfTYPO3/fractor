@@ -14,17 +14,16 @@ use PHPUnit\Framework\TestCase;
 
 final class ChangedFilesDetectorTest extends TestCase
 {
+    private Cache $cache;
+
     private ChangedFilesDetector $changedFilesDetector;
 
     private string $filePath;
 
     protected function setUp(): void
     {
-        $this->changedFilesDetector = new ChangedFilesDetector(
-            new FileHashComputer(),
-            new Cache(new MemoryCacheStorage()),
-            new FileHasher()
-        );
+        $this->cache = new Cache(new MemoryCacheStorage());
+        $this->changedFilesDetector = $this->createDetector();
         $this->filePath = (string) tempnam(sys_get_temp_dir(), 'fractor_detector_');
         file_put_contents($this->filePath, 'content');
     }
@@ -58,6 +57,35 @@ final class ChangedFilesDetectorTest extends TestCase
         $this->cacheFileInScope('Vendor\\SomeFractor');
 
         self::assertFalse($this->changedFilesDetector->hasFileChanged($this->filePath));
+    }
+
+    #[Test]
+    public function anotherConfigDoesNotReuseCachedFile(): void
+    {
+        $this->changedFilesDetector->setFirstResolvedConfigFileInfo('/project/Tests/fractor.14.php');
+        $this->cacheFileInScope(null);
+
+        $detectorWithOtherConfig = $this->createDetector();
+        $detectorWithOtherConfig->setFirstResolvedConfigFileInfo('/project/vendor/as/standards/fractor.14.php');
+
+        self::assertTrue($detectorWithOtherConfig->hasFileChanged($this->filePath));
+    }
+
+    #[Test]
+    public function sameConfigReusesCachedFile(): void
+    {
+        $this->changedFilesDetector->setFirstResolvedConfigFileInfo('/project/fractor.php');
+        $this->cacheFileInScope(null);
+
+        $detectorWithSameConfig = $this->createDetector();
+        $detectorWithSameConfig->setFirstResolvedConfigFileInfo('/project/fractor.php');
+
+        self::assertFalse($detectorWithSameConfig->hasFileChanged($this->filePath));
+    }
+
+    private function createDetector(): ChangedFilesDetector
+    {
+        return new ChangedFilesDetector(new FileHashComputer(), $this->cache, new FileHasher());
     }
 
     private function cacheFileInScope(?string $onlyRule): void

@@ -73,6 +73,8 @@ final class Option
 
     public const REGISTERED_FRACTOR_RULES = 'registered_fractor_rules';
 
+    public const CONFIGURED_FRACTOR_RULES = 'configured_fractor_rules';
+
     public const OPTIONS = 'options';
 
     /**
