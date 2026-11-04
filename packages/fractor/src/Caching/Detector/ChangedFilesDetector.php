@@ -21,6 +21,8 @@ final class ChangedFilesDetector
 
     private string $scopeSuffix = '';
 
+    private string $configSuffix = '';
+
     public function __construct(
         private readonly FileHashComputer $fileHashComputer,
         private readonly Cache $cache,
@@ -77,13 +79,16 @@ final class ChangedFilesDetector
     }
 
     /**
+     * Ties every cache entry to the config fingerprint, so a run with another config
+     * or other rule options never reuses an "unchanged" verdict of this one.
+     *
      * @api
      */
     public function setFirstResolvedConfigFileInfo(string $filePath): void
     {
-        // the first config is core to all → if it was changed, just invalidate it
         $configHash = $this->fileHashComputer->compute($filePath);
         $this->storeConfigurationDataHash($filePath, $configHash);
+        $this->configSuffix = '|config:' . $configHash;
     }
 
     private function resolvePath(string $filePath): string
@@ -97,7 +102,7 @@ final class ChangedFilesDetector
 
     private function getFilePathCacheKey(string $filePath): string
     {
-        return $this->fileHasher->hash($this->resolvePath($filePath) . $this->scopeSuffix);
+        return $this->fileHasher->hash($this->resolvePath($filePath) . $this->configSuffix . $this->scopeSuffix);
     }
 
     private function hashFile(string $filePath): string
@@ -107,7 +112,7 @@ final class ChangedFilesDetector
 
     private function storeConfigurationDataHash(string $filePath, string $configurationHash): void
     {
-        $key = CacheKey::CONFIGURATION_HASH_KEY . '_' . $this->getFilePathCacheKey($filePath);
+        $key = CacheKey::CONFIGURATION_HASH_KEY . '_' . $this->fileHasher->hash($this->resolvePath($filePath));
         $this->invalidateCacheIfConfigurationChanged($key, $configurationHash);
         $this->cache->save($key, CacheKey::CONFIGURATION_HASH_KEY, $configurationHash);
     }
