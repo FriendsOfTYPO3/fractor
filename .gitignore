@@ -1,7 +1,10 @@
-/.idea/
+# Ignore hidden files and directories in the root, except these
+/.*
+!/.editorconfig
+!/.github
+!/.gitignore
+!/.phpstorm.meta.php
+
 /vendor/
 /run-test.sh
-/.run-test.sh
 /composer.lock
-/.phpunit.cache
-/.phpunit.result.cache
