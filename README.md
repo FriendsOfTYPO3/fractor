@@ -334,6 +334,8 @@ we welcome contributions from the community. Here's how you can contribute:
 4. Run `composer run-script docs`
 5. Submit a pull request with a clear description of your changes and why they are needed.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for commit messages, pull requests and issues.
+
 ## Support
 
 For any questions or support regarding Fractor, please open an issue on GitHub. We'll do our best to help you promptly.
