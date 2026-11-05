@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        We're sorry to hear you have a problem. Please help us solve it by providing the following details.
+        We're sorry to hear you have a problem. Please help us solve it by providing the following details. Keep it short; put long logs and analyses into a `<details>` section, see CONTRIBUTING.md.
 
   - type: textarea
     id: current-code

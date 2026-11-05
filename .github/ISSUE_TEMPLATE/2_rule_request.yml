@@ -1,0 +1,38 @@
+name: Rule Request
+description: Request a rule for a TYPO3 deprecation or breaking change
+title: "Deprecation: #"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use the title of the TYPO3 changelog entry, e.g. "Deprecation: #109196 - Deprecate doktypesToShowInNewPageDragArea user TSconfig". Keep it short; long content goes into a `<details>` section.
+
+  - type: input
+    id: changelog
+    attributes:
+      label: TYPO3 Changelog
+      description: Link to the changelog entry on docs.typo3.org
+      placeholder: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-109196-...html
+    validations:
+      required: true
+
+  - type: textarea
+    id: migration
+    attributes:
+      label: Expected Migration
+      description: The code before and after, as a diff
+      placeholder: |
+        ```diff
+        -options.pageTree.doktypesToShowInNewPageDragArea = 1,6,4
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Edge cases the rule should handle or skip
+    validations:
+      required: false
