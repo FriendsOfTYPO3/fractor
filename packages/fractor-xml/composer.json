@@ -25,7 +25,6 @@
         "a9f/fractor": "^1.1",
         "a9f/fractor-extension-installer": "^1.1",
         "simonschaufi/pretty-xml": "^3.0.0",
-        "symplify/rule-doc-generator-contracts": "^11.2",
         "webmozart/assert": "^1.11 || ^2.0"
     },
     "minimum-stability": "dev",

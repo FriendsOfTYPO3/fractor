@@ -6,7 +6,7 @@ namespace a9f\FractorPhpStanRules\Tests\Rules\AddChangelogDocBlockForFractorRule
 
 use a9f\Fractor\Application\Contract\FractorRule;
 use a9f\Fractor\Contract\NoChangelogRequired;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 
 final class SkipWithNonRequiredInterface implements FractorRule, NoChangelogRequired
 {

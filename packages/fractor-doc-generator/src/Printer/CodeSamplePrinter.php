@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace a9f\FractorDocGenerator\Printer;
 
+use a9f\Fractor\RuleDoc\CodeSample\ConfiguredCodeSample;
+use a9f\Fractor\RuleDoc\Contract\CodeSampleInterface;
+use a9f\Fractor\RuleDoc\Contract\ConfigurableRuleInterface;
 use a9f\FractorDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use a9f\FractorDocGenerator\Exception\ConfigurationBoundException;
 use a9f\FractorDocGenerator\ValueObject\DocumentedRule;
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 
 final readonly class CodeSamplePrinter
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace a9f\FractorDocGenerator\Printer;
 
+use a9f\Fractor\RuleDoc\Contract\CodeSampleInterface;
 use a9f\FractorDocGenerator\Printer\Markdown\MarkdownDiffer;
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 
 final readonly class DiffCodeSamplePrinter
 {

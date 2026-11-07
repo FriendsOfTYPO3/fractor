@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace a9f\FractorDocGenerator\ValueObject;
 
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 
 final readonly class DocumentedRule
 {

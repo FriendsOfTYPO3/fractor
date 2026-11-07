@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace a9f\FractorFluid\Tests\Fixtures;
 
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorFluid\Contract\FluidFractorRule;
 use Nette\Utils\Strings;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class DummyFluidFractorRule implements FluidFractorRule
 {

@@ -299,7 +299,44 @@ Here's how you can extend Fractor with a custom rule:
 - Create a new rule by subclassing the appropriate rule class for the file type,
   e.g. `\a9f\FractorXml\XmlFractor` for XML files.
 - Each rule should specify the conditions under which it should be applied and the corresponding changes to be made.
+- Each rule documents itself in `getRuleDefinition()`, using
+  `\a9f\Fractor\RuleDoc\RuleDefinition` and the code samples in
+  `\a9f\Fractor\RuleDoc\CodeSample`.
 - Ideally, new rules also have a test case that validates that they work correctly.
+
+#### Migrating Rules from symplify/rule-doc-generator-contracts
+
+Fractor no longer uses the abandoned `symplify/rule-doc-generator-contracts`.
+Rules that import `Symplify\RuleDocGenerator\*` classes have to switch to
+`a9f\Fractor\RuleDoc\*`. Rector can do this in one run:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Rector\Config\RectorConfig;
+use Rector\Renaming\Rector\Name\RenameClassRector;
+
+return RectorConfig::configure()
+    ->withPaths([__DIR__ . '/src'])
+    ->withImportNames(importShortClasses: false, removeUnusedImports: true)
+    ->withConfiguredRule(RenameClassRector::class, [
+        'Symplify\RuleDocGenerator\Contract\CodeSampleInterface' => 'a9f\Fractor\RuleDoc\Contract\CodeSampleInterface',
+        'Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface' => 'a9f\Fractor\RuleDoc\Contract\ConfigurableRuleInterface',
+        'Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface' => 'a9f\Fractor\RuleDoc\Contract\DocumentedRuleInterface',
+        'Symplify\RuleDocGenerator\Exception\PoorDocumentationException' => 'a9f\Fractor\RuleDoc\Exception\PoorDocumentationException',
+        'Symplify\RuleDocGenerator\Exception\ShouldNotHappenException' => 'a9f\Fractor\RuleDoc\Exception\ShouldNotHappenException',
+        'Symplify\RuleDocGenerator\ValueObject\AbstractCodeSample' => 'a9f\Fractor\RuleDoc\AbstractCodeSample',
+        'Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample' => 'a9f\Fractor\RuleDoc\CodeSample\CodeSample',
+        'Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample' => 'a9f\Fractor\RuleDoc\CodeSample\ConfiguredCodeSample',
+        'Symplify\RuleDocGenerator\ValueObject\CodeSample\ExtraFileCodeSample' => 'a9f\Fractor\RuleDoc\CodeSample\ExtraFileCodeSample',
+        'Symplify\RuleDocGenerator\ValueObject\RuleDefinition' => 'a9f\Fractor\RuleDoc\RuleDefinition',
+    ]);
+```
+
+Run it with `vendor/bin/rector process --config <file>`, after Fractor
+is updated so the new classes exist.
 
 #### Registering New Rules
 

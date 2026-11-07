@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace a9f\FractorXml\Tests;
 
 use a9f\Fractor\Application\ValueObject\File;
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorXml\AbstractXmlFractor;
 use a9f\FractorXml\DomDocumentIterator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class AbstractXmlFractorTest extends TestCase
 {

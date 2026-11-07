@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace a9f\Typo3Fractor\TYPO3v14\Htaccess;
 
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorHtaccess\Contract\HtaccessFractorRule;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Tivie\HtaccessParser\HtaccessContainer;
 use Tivie\HtaccessParser\Token\Block;
 use Tivie\HtaccessParser\Token\Directive;

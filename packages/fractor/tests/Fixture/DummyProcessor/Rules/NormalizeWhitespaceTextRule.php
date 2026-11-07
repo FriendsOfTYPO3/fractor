@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace a9f\Fractor\Tests\Fixture\DummyProcessor\Rules;
 
 use a9f\Fractor\Application\ValueObject\File;
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\Fractor\Tests\Fixture\DummyProcessor\Contract\TextRule;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * Trims trailing whitespace from every line: a purely cosmetic reformat that

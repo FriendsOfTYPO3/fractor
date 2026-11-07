@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace a9f\FractorXml\Tests\Fixtures;
 
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\Typo3Fractor\AbstractFlexformFractor;
 use a9f\Typo3Fractor\Helper\FlexFormHelperTrait;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class DummyXmlFractorRule extends AbstractFlexformFractor
 {

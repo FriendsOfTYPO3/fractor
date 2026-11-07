@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace a9f\FractorDocGenerator;
 
+use a9f\Fractor\RuleDoc\Contract\DocumentedRuleInterface;
 use a9f\FractorDocGenerator\Exception\ShouldNotHappenException;
 use a9f\FractorDocGenerator\ValueObject\DocumentedRule;
 use a9f\FractorDocGenerator\ValueObject\RuleClassWithFilePath;
 use ReflectionClass;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 
 final class RuleDefinitionsResolver
 {

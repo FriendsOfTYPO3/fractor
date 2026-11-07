@@ -30,7 +30,6 @@
         "symfony/dependency-injection": "^6.4 || ^7.0 || ^8.0",
         "symfony/filesystem": "^5.4 || ^6.4 || ^7.0 || ^8.0",
         "symfony/finder": "^5.4 || ^6.4 || ^7.0 || ^8.0",
-        "symplify/rule-doc-generator-contracts": "^11.2",
         "webmozart/assert": "^1.11 || ^2.0"
     },
     "autoload": {

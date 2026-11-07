@@ -26,7 +26,6 @@
         "ergebnis/json-printer": "^3.5",
         "nette/utils": "^4.0",
         "simonschaufi/composer-json-manipulator": "^1.0",
-        "symplify/rule-doc-generator-contracts": "^11.2",
         "webmozart/assert": "^1.11 || ^2.0"
     },
     "minimum-stability": "dev",
