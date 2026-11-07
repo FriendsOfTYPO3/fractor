@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace a9f\FractorYaml\Tests\Fixtures;
 
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorYaml\Contract\YamlFractorRule;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class DummyYamlFractorRule implements YamlFractorRule
 {

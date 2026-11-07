@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace a9f\FractorXliff\Tests\Fixtures;
 
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorXliff\Contract\XliffFractorRule;
 use a9f\FractorXliff\ValueObject\XliffDocument;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class DummyXliffFractorRule implements XliffFractorRule
 {

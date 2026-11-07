@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace a9f\Typo3Fractor\TYPO3v10\FlexForm;
 
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\Typo3Fractor\AbstractFlexformFractor;
 use a9f\Typo3Fractor\Helper\FlexFormHelperTrait;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @changelog https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/10.1/Feature-88907-AlwaysEnableFilterInSelectMultipleSideBySideFields.html

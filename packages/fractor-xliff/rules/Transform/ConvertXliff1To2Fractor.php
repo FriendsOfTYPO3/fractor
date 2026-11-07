@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace a9f\FractorXliff\Transform;
 
 use a9f\Fractor\Contract\NoChangelogRequired;
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorXliff\Contract\XliffFractorRule;
 use a9f\FractorXliff\ValueObject\XliffDocument;
 use a9f\FractorXliff\ValueObject\XliffVersion;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see \a9f\FractorXliff\Tests\Transform\ConvertXliff1To2Fractor\ConvertXliff1To2FractorTest

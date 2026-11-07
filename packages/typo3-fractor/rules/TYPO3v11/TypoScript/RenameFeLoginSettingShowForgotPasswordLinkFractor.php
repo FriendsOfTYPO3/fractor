@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace a9f\Typo3Fractor\TYPO3v11\TypoScript;
 
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorTypoScript\AbstractTypoScriptFractor;
 use Helmich\TypoScriptParser\Parser\AST\Operator\Assignment;
 use Helmich\TypoScriptParser\Parser\AST\Statement;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @changelog https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/11.5.x/Important-98122-FixFeloginVariableNameInTypoScriptSetup.html

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace a9f\FractorDocGenerator\Printer;
 
+use a9f\Fractor\RuleDoc\Contract\DocumentedRuleInterface;
+use a9f\FractorDocGenerator\FileSystem\ClassByTypeFinder;
+use a9f\FractorDocGenerator\RuleDefinitionsResolver;
+use a9f\FractorDocGenerator\ValueObject\RuleClassWithFilePath;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\FileSystem\ClassByTypeFinder;
-use Symplify\RuleDocGenerator\RuleDefinitionsResolver;
-use Symplify\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 
 final readonly class DirectoryToMarkdownPrinter
 {
@@ -43,10 +43,10 @@ final readonly class DirectoryToMarkdownPrinter
 
         $this->symfonyStyle->note('Resolving rule definitions');
 
-        $ruleDefinitions = $this->ruleDefinitionsResolver->resolveFromClassNames($documentedRuleClasses);
+        $documentedRules = $this->ruleDefinitionsResolver->resolveFromClassNames($documentedRuleClasses);
 
         $this->symfonyStyle->note('Printing rule definitions');
-        $markdownLines = $this->ruleDefinitionsPrinter->print($ruleDefinitions);
+        $markdownLines = $this->ruleDefinitionsPrinter->print($documentedRules);
 
         $fileContent = '';
         foreach ($markdownLines as $markdownLine) {

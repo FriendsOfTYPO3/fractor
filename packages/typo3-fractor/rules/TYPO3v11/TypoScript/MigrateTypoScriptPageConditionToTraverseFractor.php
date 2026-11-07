@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace a9f\Typo3Fractor\TYPO3v11\TypoScript;
 
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorTypoScript\AbstractTypoScriptFractor;
 use Helmich\TypoScriptParser\Parser\AST\ConditionalStatement;
 use Helmich\TypoScriptParser\Parser\AST\Statement;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @changelog https://docs.typo3.org/m/typo3/reference-typoscript/11.5/en-us/Conditions/Index.html

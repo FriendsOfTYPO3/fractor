@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace a9f\FractorDocGenerator\Printer;
 
-use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use a9f\FractorDocGenerator\Text\KeywordHighlighter;
+use a9f\FractorDocGenerator\ValueObject\DocumentedRule;
 
 final readonly class RuleDefinitionsPrinter
 {
@@ -16,28 +16,30 @@ final readonly class RuleDefinitionsPrinter
     }
 
     /**
-     * @param RuleDefinition[] $ruleDefinitions
+     * @param DocumentedRule[] $documentedRules
      * @return string[]
      */
-    public function print(array $ruleDefinitions): array
+    public function print(array $documentedRules): array
     {
-        $ruleCount = count($ruleDefinitions);
+        $ruleCount = count($documentedRules);
 
         $lines = [];
         $lines[] = sprintf('# %d Rules Overview', $ruleCount);
 
-        return $this->printRuleDefinitions($ruleDefinitions, $lines);
+        return $this->printRuleDefinitions($documentedRules, $lines);
     }
 
     /**
-     * @param RuleDefinition[] $ruleDefinitions
+     * @param DocumentedRule[] $documentedRules
      * @param string[] $lines
      * @return string[]
      */
-    private function printRuleDefinitions(array $ruleDefinitions, array $lines): array
+    private function printRuleDefinitions(array $documentedRules, array $lines): array
     {
-        foreach ($ruleDefinitions as $ruleDefinition) {
-            $lines[] = '## ' . $ruleDefinition->getRuleShortClass();
+        foreach ($documentedRules as $documentedRule) {
+            $ruleDefinition = $documentedRule->getRuleDefinition();
+
+            $lines[] = '## ' . $documentedRule->getRuleShortClass();
 
             $lines[] = $this->keywordHighlighter->highlight($ruleDefinition->getDescription());
 
@@ -45,9 +47,9 @@ final readonly class RuleDefinitionsPrinter
                 $lines[] = ':wrench: **configure it!**';
             }
 
-            $lines[] = '- class: [`' . $ruleDefinition->getRuleClass() . '`](' . $ruleDefinition->getRuleFilePath() . ')';
+            $lines[] = '- class: [`' . $documentedRule->getRuleClass() . '`](' . $ruleDefinition->getRuleFilePath() . ')';
 
-            $codeSampleLines = $this->codeSamplePrinter->print($ruleDefinition);
+            $codeSampleLines = $this->codeSamplePrinter->print($documentedRule);
             $lines = array_merge($lines, $codeSampleLines);
         }
 

@@ -46,6 +46,7 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
         ->exclude(
             [
                 __DIR__ . '/../src/Console/Output',
+                __DIR__ . '/../src/RuleDoc',
                 __DIR__ . '/../src/Testing',
                 __DIR__ . '/../src/ValueObject',
                 __DIR__ . '/../src/**/ValueObject',
