@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use a9f\FractorDocGenerator\Console\Factory\SymfonyStyleFactory;
+use a9f\FractorDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use a9f\FractorDocGenerator\Differ\DifferFactory;
 use a9f\FractorDocGenerator\FractorDocGeneratorApplication;
 use a9f\FractorDocGenerator\Printer\CodeSamplePrinter;
@@ -12,10 +13,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
-use Symplify\RuleDocGenerator\FileSystem\ClassByTypeFinder;
-use Symplify\RuleDocGenerator\RuleDefinitionsResolver;
-use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
@@ -26,10 +23,8 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
         ->public()
         ->autoconfigure();
 
-    $services->load('a9f\\FractorDocGenerator\\', __DIR__ . '/../src/');
-    $services->set(ClassByTypeFinder::class);
-    $services->set(RuleDefinitionsResolver::class);
-    $services->set(KeywordHighlighter::class);
+    $services->load('a9f\\FractorDocGenerator\\', __DIR__ . '/../src/')
+        ->exclude([__DIR__ . '/../src/ValueObject']);
     $services->set(Differ::class)->factory([service(DifferFactory::class), 'create']);
 
     $services->set(FractorDocGeneratorApplication::class)

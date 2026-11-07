@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace a9f\FractorDocGenerator\RuleCodeSamplePrinter;
 
 use a9f\Fractor\Application\Contract\FractorRule;
+use a9f\FractorDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use a9f\FractorDocGenerator\Printer\DiffCodeSamplePrinter;
+use a9f\FractorDocGenerator\ValueObject\DocumentedRule;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final readonly class FractorRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
 {
@@ -22,7 +22,7 @@ final readonly class FractorRuleCodeSamplePrinter implements RuleCodeSamplePrint
         return is_a($class, FractorRule::class, true);
     }
 
-    public function print(CodeSampleInterface $codeSample, RuleDefinition $ruleDefinition): array
+    public function print(CodeSampleInterface $codeSample, DocumentedRule $documentedRule): array
     {
         return $this->diffCodeSamplePrinter->print($codeSample);
     }

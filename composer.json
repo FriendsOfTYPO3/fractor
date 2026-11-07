@@ -23,6 +23,7 @@
         "helmich/typo3-typoscript-parser": "^2.8.0",
         "league/flysystem": "^2.0 || ^3.0",
         "league/flysystem-memory": "^2.0 || ^3.0",
+        "nette/robot-loader": "^4.0",
         "nette/utils": "^4.0",
         "ondram/ci-detector": "^4.2",
         "phpstan/phpstan": "^2.0.0",
@@ -46,8 +47,7 @@
         "phpunit/phpunit": "^10.5",
         "rector/rector": "^2.0.0",
         "symplify/easy-coding-standard": "^12.3",
-        "symplify/monorepo-builder": "^11.2",
-        "symplify/rule-doc-generator": "12.1.3"
+        "symplify/monorepo-builder": "^11.2"
     },
     "replace": {
         "a9f/fractor": "self.version",
