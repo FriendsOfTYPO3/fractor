@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace a9f\FractorHtaccess\Tests\Fixtures;
 
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorHtaccess\Contract\HtaccessFractorRule;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Tivie\HtaccessParser\HtaccessContainer;
 use Tivie\HtaccessParser\Token\Block;
 use Tivie\HtaccessParser\Token\TokenInterface;

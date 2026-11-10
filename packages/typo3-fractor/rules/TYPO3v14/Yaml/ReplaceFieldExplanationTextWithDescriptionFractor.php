@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace a9f\Typo3Fractor\TYPO3v14\Yaml;
 
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorYaml\Contract\YamlFractorRule;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @changelog https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.2/Deprecation-107068-RenameFieldExplanationTextToDescription.html

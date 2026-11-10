@@ -23,7 +23,6 @@
         "a9f/fractor": "^1.1",
         "a9f/fractor-extension-installer": "^1.1",
         "nette/utils": "^4.0",
-        "symplify/rule-doc-generator-contracts": "^11.2",
         "tivie/htaccess-parser": "^0.4.0",
         "webmozart/assert": "^1.11 || ^2.0"
     },

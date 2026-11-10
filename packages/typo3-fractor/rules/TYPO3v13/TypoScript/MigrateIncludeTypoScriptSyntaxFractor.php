@@ -6,6 +6,8 @@ namespace a9f\Typo3Fractor\TYPO3v13\TypoScript;
 
 use a9f\Fractor\Contract\FilesystemInterface;
 use a9f\Fractor\Contract\LocalFilesystemInterface;
+use a9f\Fractor\RuleDoc\CodeSample\CodeSample;
+use a9f\Fractor\RuleDoc\RuleDefinition;
 use a9f\FractorTypoScript\AbstractTypoScriptFractor;
 use a9f\Typo3Fractor\Utility\ExtensionManagementUtility;
 use Helmich\TypoScriptParser\Parser\AST\Builder;
@@ -15,8 +17,6 @@ use Helmich\TypoScriptParser\Parser\AST\DirectoryIncludeStatement;
 use Helmich\TypoScriptParser\Parser\AST\FileIncludeStatement;
 use Helmich\TypoScriptParser\Parser\AST\Statement;
 use League\Flysystem\FileAttributes;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @changelog https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/Deprecation-105171-INCLUDE_TYPOSCRIPTTypoScriptSyntax.html

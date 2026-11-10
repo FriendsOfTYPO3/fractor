@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace a9f\FractorDocGenerator\Printer;
 
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
-use Symplify\RuleDocGenerator\Exception\ConfigurationBoundException;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use a9f\Fractor\RuleDoc\CodeSample\ConfiguredCodeSample;
+use a9f\Fractor\RuleDoc\Contract\CodeSampleInterface;
+use a9f\Fractor\RuleDoc\Contract\ConfigurableRuleInterface;
+use a9f\FractorDocGenerator\Contract\RuleCodeSamplePrinterInterface;
+use a9f\FractorDocGenerator\Exception\ConfigurationBoundException;
+use a9f\FractorDocGenerator\ValueObject\DocumentedRule;
 
 final readonly class CodeSamplePrinter
 {
@@ -24,19 +24,19 @@ final readonly class CodeSamplePrinter
     /**
      * @return string[]
      */
-    public function print(RuleDefinition $ruleDefinition): array
+    public function print(DocumentedRule $documentedRule): array
     {
         $lines = [];
 
-        foreach ($ruleDefinition->getCodeSamples() as $codeSample) {
-            $this->ensureConfigureRuleBoundsConfiguredCodeSample($codeSample, $ruleDefinition);
+        foreach ($documentedRule->getRuleDefinition()->getCodeSamples() as $codeSample) {
+            $this->ensureConfigureRuleBoundsConfiguredCodeSample($codeSample, $documentedRule);
 
             foreach ($this->ruleCodeSamplePrinters as $ruleCodeSamplePrinter) {
-                if (! $ruleCodeSamplePrinter->isMatch($ruleDefinition->getRuleClass())) {
+                if (! $ruleCodeSamplePrinter->isMatch($documentedRule->getRuleClass())) {
                     continue;
                 }
 
-                $newLines = $ruleCodeSamplePrinter->print($codeSample, $ruleDefinition);
+                $newLines = $ruleCodeSamplePrinter->print($codeSample, $documentedRule);
                 $lines = array_merge($lines, $newLines);
                 break;
             }
@@ -49,29 +49,29 @@ final readonly class CodeSamplePrinter
 
     private function ensureConfigureRuleBoundsConfiguredCodeSample(
         CodeSampleInterface $codeSample,
-        RuleDefinition $ruleDefinition
+        DocumentedRule $documentedRule
     ): void {
         // ensure the configured rule + configure code sample are used
         if ($codeSample instanceof ConfiguredCodeSample) {
-            if (is_a($ruleDefinition->getRuleClass(), ConfigurableRuleInterface::class, true)) {
+            if (is_a($documentedRule->getRuleClass(), ConfigurableRuleInterface::class, true)) {
                 return;
             }
 
             $errorMessage = sprintf(
                 'The "%s" rule has configure code sample and must implements "%s" interface',
-                $ruleDefinition->getRuleClass(),
+                $documentedRule->getRuleClass(),
                 ConfigurableRuleInterface::class
             );
             throw new ConfigurationBoundException($errorMessage);
         }
 
-        if (! is_a($ruleDefinition->getRuleClass(), ConfigurableRuleInterface::class, true)) {
+        if (! is_a($documentedRule->getRuleClass(), ConfigurableRuleInterface::class, true)) {
             return;
         }
 
         $errorMessage = sprintf(
             'The "%s" rule implements "%s" and code sample must be "%s"',
-            $ruleDefinition->getRuleClass(),
+            $documentedRule->getRuleClass(),
             ConfigurableRuleInterface::class,
             ConfiguredCodeSample::class,
         );
