@@ -6,6 +6,7 @@ namespace a9f\FractorExtensionInstaller;
 
 use Composer\Installer\InstallationManager;
 use Composer\Repository\InstalledRepositoryInterface;
+use Composer\Util\Filesystem;
 
 class PackagesFileGenerator
 {
@@ -55,7 +56,18 @@ PHP;
      */
     public static function write(array $installedPackages, string $fileToGenerate): void
     {
-        $installedPackagesCode = var_export($installedPackages, true);
+        // Paths relative to the generated file, so it stays valid when vendor/ is used at another
+        // absolute path than during "composer install", e.g. on the host vs. inside a container
+        $filesystem = new Filesystem();
+        $installedPackagesCode = "[\n";
+        foreach ($installedPackages as $name => $package) {
+            $installedPackagesCode .= sprintf(
+                "        %s => ['path' => %s],\n",
+                var_export($name, true),
+                $filesystem->findShortestPathCode($fileToGenerate, $package['path'], false, true)
+            );
+        }
+        $installedPackagesCode .= '    ]';
 
         file_put_contents($fileToGenerate, sprintf(self::FILE_TEMPLATE, $installedPackagesCode));
     }
