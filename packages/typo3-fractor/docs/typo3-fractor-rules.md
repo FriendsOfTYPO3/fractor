@@ -561,6 +561,122 @@ Migrate password and salted password to password type
 
 <br>
 
+## MigratePluginContentElementAndPluginSubtypesFractorChatGPT
+
+Migrate plugin content element and plugin subtypes (list_type)
+
+- class: [`a9f\Typo3Fractor\TYPO3v13\TypoScript\MigratePluginContentElementAndPluginSubtypesFractorChatGPT`](../rules/TYPO3v13/TypoScript/MigratePluginContentElementAndPluginSubtypesFractorChatGPT.php)
+
+```diff
+-tt_content.list.20.examples_pi1 = USER
+-tt_content.list.20.examples_pi1 {
+-    userFunc = MyVendor\Examples\Controller\ExampleController->example
++tt_content.examples_pi1 =< lib.contentElement
++tt_content.examples_pi1 {
++    20 = USER
++    20 {
++        userFunc = MyVendor\Examples\Controller\ExampleController->example
++    }
++    templateName = Generic
+ }
+
+-tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
++tt_content.examples_pi1.20 < plugin.tx_examples_pi1
+```
+
+<br>
+
+```diff
+-tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
++tt_content.examples_pi1.20 < plugin.tx_examples_pi1
+```
+
+<br>
+
+## MigratePluginContentElementAndPluginSubtypesFractorGeminiV1
+
+Migrate plugin content element and plugin subtypes (list_type)
+
+- class: [`a9f\Typo3Fractor\TYPO3v13\TypoScript\MigratePluginContentElementAndPluginSubtypesFractorGeminiV1`](../rules/TYPO3v13/TypoScript/MigratePluginContentElementAndPluginSubtypesFractorGeminiV1.php)
+
+```diff
+-tt_content.list.20.examples_pi1 = USER
+-tt_content.list.20.examples_pi1 {
+-    userFunc = MyVendor\Examples\Controller\ExampleController->example
++tt_content.examples_pi1 =< lib.contentElement
++tt_content.examples_pi1 {
++    20 = USER
++    20 {
++        userFunc = MyVendor\Examples\Controller\ExampleController->example
++    }
++    templateName = Generic
+ }
+
+-tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
++tt_content.examples_pi1.20 < plugin.tx_examples_pi1
+```
+
+<br>
+
+```diff
+-tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
++tt_content.examples_pi1.20 < plugin.tx_examples_pi1
+```
+
+<br>
+
+## MigratePluginContentElementAndPluginSubtypesFractorGeminiV2
+
+Migrate plugin content element and plugin subtypes (list_type)
+
+- class: [`a9f\Typo3Fractor\TYPO3v13\TypoScript\MigratePluginContentElementAndPluginSubtypesFractorGeminiV2`](../rules/TYPO3v13/TypoScript/MigratePluginContentElementAndPluginSubtypesFractorGeminiV2.php)
+
+```diff
+-tt_content.list.20.examples_pi1 = USER
+-tt_content.list.20.examples_pi1 {
+-    userFunc = MyVendor\Examples\Controller\ExampleController->example
++tt_content.examples_pi1 =< lib.contentElement
++tt_content.examples_pi1 {
++    20 = USER
++    20 {
++        userFunc = MyVendor\Examples\Controller\ExampleController->example
++    }
++    templateName = Generic
+ }
+
+-tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
++tt_content.examples_pi1.20 < plugin.tx_examples_pi1
+```
+
+<br>
+
+```diff
+-tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
++tt_content.examples_pi1.20 < plugin.tx_examples_pi1
+```
+
+<br>
+
+## MigratePluginContentElementAndPluginSubtypesFractor
+
+Migrate plugin content element and plugin subtypes (list_type)
+
+- class: [`a9f\Typo3Fractor\TYPO3v13\TypoScript\MigratePluginContentElementAndPluginSubtypesFractor`](../rules/TYPO3v13/TypoScript/MigratePluginContentElementAndPluginSubtypesFractor.php)
+
+```diff
+-tt_content.list.20.examples_pi1 = USER
+-tt_content.list.20.examples_pi1 {
++tt_content.examples_pi1 = USER
++tt_content.examples_pi1 {
+     userFunc = MyVendor\Examples\Controller\ExampleController->example
+ }
+
+-tt_content.list.20.examples_pi1 < plugin.tx_examples_pi1
++tt_content.examples_pi1 < plugin.tx_examples_pi1
+```
+
+<br>
+
 ## MigrateRenderTypeColorpickerToTypeColorFlexFormFractor
 
 Migrate renderType colorpicker to type color
