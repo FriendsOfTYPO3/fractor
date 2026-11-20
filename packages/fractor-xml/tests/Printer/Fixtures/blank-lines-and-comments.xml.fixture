@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<phpunit
+  bootstrap="vendor/autoload.php"
+  colors="true"
+>
+
+  <testsuites>
+    <testsuite name="Unit">
+      <directory>Tests/Unit</directory>
+    </testsuite>
+  </testsuites>
+
+
+
+  <!-- only our own code counts for coverage -->
+  <source>
+    <include>
+      <directory>Classes</directory>
+    </include>
+  </source>
+
+</phpunit>
+
+<!-- trailing comment -->
+-----
+<?xml version="1.0"?>
+<phpunit
+    bootstrap="vendor/autoload.php"
+    colors="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>Tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- only our own code counts for coverage -->
+    <source>
+        <include>
+            <directory>Classes</directory>
+        </include>
+    </source>
+</phpunit>
+
+<!-- trailing comment -->

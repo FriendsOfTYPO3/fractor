@@ -14,6 +14,8 @@ use a9f\FractorXliff\Contract\XliffFractorRule;
 use a9f\FractorXliff\ValueObject\XliffDocument;
 use a9f\FractorXliff\ValueObject\XliffFormatConfiguration;
 use a9f\FractorXliff\ValueObject\XliffVersion;
+use a9f\FractorXml\Printer\SourceMap;
+use a9f\FractorXml\Printer\XmlPrinter;
 use PrettyXml\Formatter;
 
 /**
@@ -27,6 +29,7 @@ final readonly class XliffFileProcessor implements FileProcessor
     public function __construct(
         private DomDocumentFactory $domDocumentFactory,
         private Formatter $formatter,
+        private XmlPrinter $xmlPrinter,
         private iterable $rules,
         private Indent $indent,
         private ChangedFilesDetector $changedFilesDetector,
@@ -46,10 +49,10 @@ final readonly class XliffFileProcessor implements FileProcessor
     {
         $originalXml = $file->getOriginalContent();
         $document = $this->domDocumentFactory->createFromXml($originalXml);
+        $sourceMap = SourceMap::create($originalXml, $document);
 
-        // Normalize baseline formatting for clean diffs
-        $oldXml = $this->saveXml($document);
-        $oldXml = $this->formatXml($oldXml);
+        // Printed before the rules as well, so the diff shows only the rule's change
+        $oldXml = $this->print($document, $sourceMap);
         $file->changeOriginalContent($oldXml);
 
         $version = XliffVersion::fromDomDocument($document);
@@ -63,8 +66,7 @@ final readonly class XliffFileProcessor implements FileProcessor
             }
         }
 
-        $newXml = $this->saveXml($xliffDocument->document);
-        $newXml = $this->formatXml($newXml);
+        $newXml = $this->print($xliffDocument->document, $sourceMap);
 
         // Compare against raw original to detect formatting changes too
         if ($newXml === $originalXml) {
@@ -91,12 +93,17 @@ final readonly class XliffFileProcessor implements FileProcessor
         return $this->rules;
     }
 
+    private function print(\DOMDocument $document, ?SourceMap $sourceMap): string
+    {
+        if ($this->xmlPrinter->canPrint($document)) {
+            return $this->xmlPrinter->print($document, $this->indent, $sourceMap);
+        }
+
+        return $this->formatXml($this->saveXml($document));
+    }
+
     private function saveXml(\DOMDocument $document): string
     {
-        // Ensure a proper encoding so non-ASCII characters stay literal
-        if ($document->encoding === null || $document->encoding === '') {
-            $document->encoding = 'UTF-8';
-        }
         $xml = $document->saveXML();
         if ($xml === false) {
             throw new ShouldNotHappenException('Could not save XLIFF document');

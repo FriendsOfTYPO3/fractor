@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:my_extension/Resources/Private/Language/locallang.xlf" date="2026-01-01T00:00:00Z" product-name="my_extension">
+		<header/>
+		<body>
+			<trans-unit id="plugin.title" resname="plugin.title" xml:space="preserve">
+				<source>My plugin</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
+-----
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:my_extension/Resources/Private/Language/locallang.xlf" date="2026-01-01T00:00:00Z" product-name="my_extension">
+        <header/>
+        <body>
+            <trans-unit id="plugin.title" resname="plugin.title" xml:space="preserve">
+                <source>My plugin</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

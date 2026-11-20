@@ -13,6 +13,8 @@ composer require a9f/fractor-xliff --dev
 
 ## Configuration
 
+Only the indentation follows the configuration: attributes keep their order and their lines; comments, text and single blank lines between elements stay as written.
+
 ```php
 <?php
 

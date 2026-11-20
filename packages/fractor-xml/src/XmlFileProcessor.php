@@ -12,6 +12,8 @@ use a9f\Fractor\ValueObject\Indent;
 use a9f\FractorXml\Contract\DomNodeVisitor;
 use a9f\FractorXml\Contract\Formatter;
 use a9f\FractorXml\Contract\XmlFractor;
+use a9f\FractorXml\Printer\SourceMap;
+use a9f\FractorXml\Printer\XmlPrinter;
 use a9f\FractorXml\ValueObject\XmlFormatConfiguration;
 use a9f\FractorXml\ValueObjectFactory\DomDocumentFactory;
 
@@ -26,6 +28,7 @@ final readonly class XmlFileProcessor implements FileProcessor
     public function __construct(
         private DomDocumentFactory $domDocumentFactory,
         private Formatter $formatter,
+        private XmlPrinter $xmlPrinter,
         private iterable $rules,
         private Indent $indent,
         private ChangedFilesDetector $changedFilesDetector,
@@ -46,19 +49,16 @@ final readonly class XmlFileProcessor implements FileProcessor
         $fileHasChanged = \false;
         $originalXml = $file->getOriginalContent();
         $document = $this->domDocumentFactory->createFromXml($originalXml);
+        $sourceMap = SourceMap::create($originalXml, $document);
 
-        // This is a hacky trick to keep format and create a nice diff later
-        $oldXml = $this->saveXml($document);
-        $oldXml = str_replace('-&gt;', '->', $oldXml);
-        $oldXml = rtrim($this->formatter->format($this->indent, $oldXml)) . "\n";
+        // Printed before the rules as well, so the diff shows only the rule's change
+        $oldXml = $this->print($document, $sourceMap);
         $file->changeOriginalContent($oldXml);
 
         $iterator = new DomDocumentIterator($appliedRules);
         $iterator->traverseDocument($file, $document);
 
-        $newXml = $this->saveXml($document);
-        $newXml = str_replace('-&gt;', '->', $newXml);
-        $newXml = rtrim($this->formatter->format($this->indent, $newXml)) . "\n";
+        $newXml = $this->print($document, $sourceMap);
 
         if ($newXml === $originalXml) {
             $this->changedFilesDetector->addCachableFile($file->getFilePath());
@@ -85,6 +85,17 @@ final readonly class XmlFileProcessor implements FileProcessor
     public function getAllRules(): iterable
     {
         return $this->rules;
+    }
+
+    private function print(\DOMDocument $document, ?SourceMap $sourceMap): string
+    {
+        if ($this->xmlPrinter->canPrint($document)) {
+            return $this->xmlPrinter->print($document, $this->indent, $sourceMap);
+        }
+
+        $xml = str_replace('-&gt;', '->', $this->saveXml($document));
+
+        return rtrim($this->formatter->format($this->indent, $xml)) . "\n";
     }
 
     private function saveXml(\DOMDocument $document): string

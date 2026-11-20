@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <item title='It&apos;s "quoted"' value="a &amp; b" lines="one&#10;two">Tom &amp; Jerry &lt;3 -&gt; done</item>
+    <arrow>Person->showSelected</arrow>
+    <nbsp>&#xA0;</nbsp>
+</root>
