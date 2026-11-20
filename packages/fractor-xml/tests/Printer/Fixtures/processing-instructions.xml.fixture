@@ -1,0 +1,13 @@
+<root>
+  <?pi   data?>
+  <?pi2 ?>
+  <?pi3
+    multi?>
+</root>
+-----
+<root>
+    <?pi   data?>
+    <?pi2 ?>
+    <?pi3
+    multi?>
+</root>

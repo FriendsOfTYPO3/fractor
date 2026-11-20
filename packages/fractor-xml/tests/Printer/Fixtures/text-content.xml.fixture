@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<T3DataStructure>
+	<ROOT>
+		<config>
+			plain text
+			<type>select</type>
+		</config>
+		<description>Hello <b>World</b> and <i>you</i>!</description>
+		<label>
+			Text on
+			several lines
+		</label>
+	</ROOT>
+</T3DataStructure>
+-----
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<T3DataStructure>
+    <ROOT>
+        <config>
+			plain text
+			<type>select</type>
+		</config>
+        <description>Hello <b>World</b> and <i>you</i>!</description>
+        <label>
+			Text on
+			several lines
+		</label>
+    </ROOT>
+</T3DataStructure>

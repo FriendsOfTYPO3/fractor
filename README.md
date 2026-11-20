@@ -166,6 +166,7 @@ return FractorConfiguration::configure()
 ```
 
 Fractor formats your xml files by default with four spaces.
+Only the indentation follows this setting: attributes keep their order and their lines; comments, empty elements, text and single blank lines between elements stay as written.
 If you want to adjust the indentation of your xml files, you can configure it this way:
 
 ```php

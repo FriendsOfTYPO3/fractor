@@ -43,6 +43,11 @@ final class XmlProcessResultTest extends AbstractFractorTestCase
             [AppliedRule::CODE_FORMAT_RULE, DummyXmlFractorRule::class],
         ];
         yield 'already formatted file reports no change' => ['already-formatted.xml.fixture', []];
+        yield 'attributes on several lines report no change' => ['attribute-layout.xml.fixture', []];
+        yield 'attributes on several lines are only re-indented' => [
+            'attribute-layout-reindented.xml.fixture',
+            [AppliedRule::CODE_FORMAT_RULE],
+        ];
     }
 
     public function testAlreadyFormattedFileIsCachedForTheNextRun(): void

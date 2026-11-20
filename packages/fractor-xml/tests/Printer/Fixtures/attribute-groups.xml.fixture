@@ -1,0 +1,19 @@
+<root>
+  <file source-language="en"
+        datatype="plaintext" original="messages">
+    <body/>
+  </file>
+  <item
+    a="1"   b="2"
+    c="3"/>
+</root>
+-----
+<root>
+    <file source-language="en"
+        datatype="plaintext" original="messages">
+        <body/>
+    </file>
+    <item
+        a="1" b="2"
+        c="3"/>
+</root>
